@@ -2,7 +2,7 @@
 
 ## 0.3.2 — 2026-11-15
 - Redesigned only the welcome screen with an edge-to-edge Holy Fire background, soft animated light, compact logo, sans-serif hierarchy and Baby Yellow Open button.
-- Made the Open button compact (180px maximum), centered its label and removed the arrow.
+- Made the Open button compact (180px maximum), centered its label, removed the arrow and balanced the space above/below it between the subtitle and scripture.
 - Integrated the owner-supplied Kolose 3:23 text with TB attribution, with no separate scripture card.
 - Added dynamic viewport sizing, safe-area padding, small-screen scrolling and reduced-motion support; all visuals remain available offline.
 - Synchronized app, displayed and service-worker cache versions; song catalog and local-data behavior remain unchanged.

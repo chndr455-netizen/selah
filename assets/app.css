@@ -15,9 +15,9 @@
 .welcome-logo{width:42px;height:42px;display:block;flex:none}
 .welcome-brand{font-size:19px;line-height:1.2;font-weight:650;letter-spacing:.22em;text-align:left}
 .welcome-sub{font-size:9px;line-height:1.5;letter-spacing:.08em;color:#f5d5c8;margin-top:4px;text-align:left}
-.welcome-message{width:100%;max-width:40rem;padding:12px 0}
+.welcome-message{width:100%;max-width:40rem}
 .welcome h1{font:650 clamp(2.25rem,8.8vw,4.5rem)/1.12 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance}
-.welcome .intro{font-size:1rem;line-height:1.65;color:#f8dcd2;max-width:22rem;margin:20px auto 28px;text-wrap:balance}
+.welcome .intro{font-size:1rem;line-height:1.65;color:#f8dcd2;max-width:22rem;margin:20px auto 0;text-wrap:balance}
 .welcome .enter{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:56px;width:min(100%,180px);padding:15px 24px;border:1px solid transparent;border-radius:18px;background:var(--baby-yellow);color:#54110f;font-size:1rem;line-height:1.5;font-weight:750;box-shadow:0 8px 32px #29060926;transition:background .2s,transform .2s}
 .welcome .enter:hover{background:#fff28e;transform:translateY(-2px)}
 .welcome .enter:active{transform:translateY(0)}
@@ -28,8 +28,8 @@
 .welcome .scripture blockquote{font:italic 1.0625rem/1.55 Georgia,serif;color:#f7ded3;margin:12px 0}
 .welcome .scripture cite{display:block;font-size:.6875rem;line-height:1.6;font-weight:600;font-style:normal;letter-spacing:.03em;color:#fff7ed}
 @keyframes welcome-light{from{opacity:.55}to{opacity:1}}
-@media(min-width:768px){.welcome{padding:calc(40px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) calc(40px + env(safe-area-inset-left,0px))}.welcome-inner{min-height:calc(100vh - 80px);min-height:calc(100dvh - 80px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}.welcome-identity{align-self:flex-start}.welcome-message{padding:24px 0}.welcome .intro{font-size:1.125rem;max-width:26rem}}
-@media(max-height:700px){.welcome-inner{gap:20px}.welcome-message{padding:0}.welcome .intro{margin:14px auto 22px}.welcome .scripture::before{margin-bottom:12px}.welcome .scripture blockquote{margin:8px 0}}
+@media(min-width:768px){.welcome{padding:calc(40px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) calc(40px + env(safe-area-inset-left,0px))}.welcome-inner{min-height:calc(100vh - 80px);min-height:calc(100dvh - 80px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}.welcome-identity{align-self:flex-start}.welcome .intro{font-size:1.125rem;max-width:26rem}}
+@media(max-height:700px){.welcome-inner{gap:20px}.welcome .intro{margin:14px auto 0}.welcome .scripture::before{margin-bottom:12px}.welcome .scripture blockquote{margin:8px 0}}
 @media(prefers-reduced-motion:reduce){.welcome::before{animation:none;opacity:.75}.welcome .enter{transition:none}.welcome .enter:hover{transform:none}}
 @media(display-mode:standalone){.welcome{overscroll-behavior-y:contain}}
 .welcome-actions{display:flex;gap:8px;flex-wrap:wrap}.data-status{font-size:12px;color:var(--muted);margin:8px 0 12px}.data-status strong{color:var(--deep-red)}.local-label{border:1px solid #e8b0a1;color:#831613;background:#fff4eb}.policy{margin-top:14px;max-width:950px}.footer .btn{margin-top:10px}.install-note{font-size:12px;color:var(--muted)}@media print{.welcome{display:none!important}}
