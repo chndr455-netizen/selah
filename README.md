@@ -1,4 +1,4 @@
-# SELAH v0.5.0 — Flexible Service Builder / PWA
+# SELAH v0.5.1 — Song Content Submission / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -18,6 +18,12 @@ Published source of truth: `data/songs.json` (public). Each song can have multip
 
 Local add/edit/delete makes an overlay visible only on that browser/device. The public catalog is checked on launch and on clicking “Muat pembaruan publik”. An edited/deleted local record takes precedence over an update to that same ID; unmodified records update normally. “Pulihkan pustaka publik” discards song overrides, not journal or academy progress, and preserves setlist references, including missing songs. Export backups before reset. A v0.2 backup can be imported (migration uses frozen baseline). Local data isn't encrypted or synced. A separate origin (old local file vs GitHub Pages URL) cannot be read automatically; export JSON from old file and import on the new site, only if desired. Never publish that backup: it can contain personal notes and lyrics.
 
+## Pengajuan lagu (v0.5.1)
+
+Buka Lagu → menu filter → Tambah lagu, atau profil lagu → edit. **Simpan Lokal** menyimpan di perangkat seperti sebelumnya. **Ekspor Pengajuan (.json)** dan **Salin Pengajuan** hanya membuat pengajuan untuk ditinjau; keduanya tidak menyimpan formulir atau memublikasikan ke GitHub. Pilih penyertaan lirik dan informasi izin secara terpisah bila diperlukan. Kolom tambahan berada di Informasi Lanjutan.
+
+Kirim berkas `selah-add-judul.json` / `selah-edit-judul.json` atau teks JSON ke ChatGPT/Codex untuk diperiksa sesuai [panduan konten](docs/CONTENT_GUIDE.md). Pengajuan EDIT membandingkan formulir dengan lagu publik, termasuk perubahan lokal yang sudah tersimpan. Lagu buatan lokal diajukan sebagai ADD. Jangan kirim cadangan penuh: pengajuan hanya berisi satu lagu. Baca isinya sebelum membagikan catatan atau teks izin yang Anda masukkan. Ekspor berfungsi offline setelah aplikasi tersimpan di cache; dukungan clipboard bergantung pada browser/izin.
+
 ## Publishing without editing code
 In Codex, send song information using `docs/CONTENT_GUIDE.md`. The agent should update only song content + content version and validate. Review PR diff, merge, then GitHub Pages publishes. Pages CMS is optional and not configured. App shell caches are versioned; users may need to close all SELAH tabs and reopen after an app update. Song JSON uses network-first with offline fallback. For an app release bump the manifest-related UI version, `data/version.json` and cache name in `sw.js`. No blanket cache clearing or local storage reset on updates.
 
@@ -33,12 +39,15 @@ Confirmed edits save locally to the active setlist and its saved-library record.
 
 Storage stays under `selah.v03.state`; v0.2/v0.4 schema-1 backups and `musicMinistry.v1` migrate to schema 2. All six legacy slot notes, selected song IDs (even outside old recommendations or missing from the library), metadata, library overlays, progress, checklist and reflections are retained. New full backups include every saved setlist and template and require v0.5+ to restore. The active `set` is also synchronized into `setlists`; `templates` are separate snapshots. Do not open new backups in an older app expecting schema 1. A failed storage write leaves the last saved data intact; export a recovery backup before closing.
 
-Master songs and the public content version are unchanged. See [v0.5 review evidence](docs/review/v050/README.md) for screenshots, test results and device limitations.
+The v0.5.1 submission feature leaves the published catalog and its content version unchanged. See [v0.5 review evidence](docs/review/v050/README.md) for screenshots, test results and device limitations.
 
 ## Verification
 ```sh
 node tests/validate.mjs
 node tests/catalog-merge.mjs
+node tests/service-model.mjs
+node tests/song-submission.mjs
+node --check assets/song-submission.js
 node --check assets/app.js
 node --check sw.js
 ```

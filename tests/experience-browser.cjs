@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/';
-const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v050');
+const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v051');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  try{
@@ -38,7 +38,7 @@ const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/revi
     await p.locator('#openLibraryOptions').click();await p.locator('#typeFilter').selectOption('P');assert.equal(await p.locator('#songGrid .song').count(),16);await p.locator('#typeFilter').selectOption('');
     await p.locator('#statusFilter').selectOption('Siap');assert.equal(await p.locator('#songGrid .song').count(),0);await p.locator('#statusFilter').selectOption('');await p.locator('#applyLibraryOptions').click();
     await p.locator('#songGrid [data-profile]').first().click();const songRoute=await p.evaluate(()=>location.hash);assert(songRoute.startsWith('#song/'));
-    await p.locator('#editProfile').click();await p.locator('#fKey').fill('G');await p.locator('#fLyrics').fill('Teks uji asli\nBaris kedua');await p.locator('#fRights').fill('Teks uji milik pembuat tes');await p.locator('#songForm button[type="submit"]').click();
+    await p.locator('#editProfile').click();await p.locator('#fKey').fill('G');await p.locator('#fLyrics').fill('Teks uji asli\nBaris kedua');await p.locator('#songAdvanced').evaluate(el=>el.open=true);await p.locator('#fRights').fill('Teks uji milik pembuat tes');await p.locator('#songForm button[type="submit"]').click();
     await p.waitForSelector('#songDialog',{state:'hidden'});assert.match(await p.locator('#panel-lyrics').innerText(),/Teks uji asli/);
     await p.locator('[data-profiletab="lyrics"]').focus();await p.keyboard.press('ArrowRight');assert.equal(await p.locator('[data-profiletab="arrange"]').getAttribute('aria-selected'),'true');assert(await p.locator('#panel-arrange').isVisible());await p.keyboard.press('End');assert(await p.locator('#panel-meaning').isVisible());await p.keyboard.press('Home');
     await p.locator('#readLyrics').click();assert(await p.locator('#lyricsDialog').isVisible());assert.match(await p.locator('#readerLyrics').innerText(),/Baris kedua/);const font=await p.locator('#readerLyrics').evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await p.locator('#largerLyrics').click();assert((await p.locator('#readerLyrics').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)))>font);
