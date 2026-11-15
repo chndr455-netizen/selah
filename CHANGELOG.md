@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 — 2026-11-15
+- Replaced fixed service slots with a flexible local Service Builder; renamed the guide to Alur Ibadah. The six-song Sunday plan remains the initial template, with editable Praise & Worship Night, Ibadah Khusus and blank starters.
+- Added arbitrary segment names/order, optional Worship/Praise/Medley/Instrumental/Doa/Firman Tuhan/Perjamuan Kudus/custom segments, trusted pointer/touch sorting and accessible editor/keyboard reordering.
+- Allowed every library song in every segment; categories and W/P now guide rather than restrict. Medleys and repeated songs are supported.
+- Added service-only key/flow/arrangement overrides, independent template/setlist copies, multiple saved setlists, native sharing with clipboard/TXT fallback, JSON export/import and complete print output.
+- Migrated schema-1 slots to schema 2 under the existing key, preserving metadata, all notes and song references without category-based clearing. Full backups retain all setlists/templates; older backups remain importable.
+- Preserved the master catalog, personal progress/reflections/checklist and offline behavior. Updated the first preparation checklist item to refer to the agreed alur rather than a mandatory song count.
+- Updated UI/app/cache to 0.5.0 and cached the model, starter-content and builder modules. Added model/browser, touch, migration, quota-recovery, offline and print validation; see docs/review/v050/README.md.
+
 ## 0.4.1 — 2026-11-15
 - Simplified Beranda to the greeting, concise search, a quiet Holy Fire devotional tile, compact icon shortcuts and song rows. Moved legacy overview material into reading, module information and settings views.
 - Renamed the library to Lagu, removed introductory copy and per-category counts, and moved advanced filters, add/refresh/restore actions and technical notes into an accessible secondary sheet.

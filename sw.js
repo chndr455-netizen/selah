@@ -1,8 +1,8 @@
 /* Increment on shell/UI release; content JSON uses network-first. */
 const PREFIX = 'selah-pwa-' + new URL(self.registration.scope).pathname + '-';
-const CACHE = PREFIX + '0.4.1';
+const CACHE = PREFIX + '0.5.0';
 const root = self.registration.scope;
-const shell = ['./','./index.html','./assets/app.css','./assets/app.js','./assets/icons.js','./assets/content.js','./assets/logo.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/icon-maskable.png','./manifest.webmanifest','./data/songs.json','./data/legacy-v02.json','./data/version.json'];
+const shell = ['./','./index.html','./assets/app.css','./assets/app.js','./assets/icons.js','./assets/content.js','./assets/service-model.js','./assets/service-templates.js','./assets/service-builder.js','./assets/logo.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/icon-maskable.png','./manifest.webmanifest','./data/songs.json','./data/legacy-v02.json','./data/version.json'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(shell.map(x=>new Request(new URL(x,root),{cache:'reload'}))))));
 self.addEventListener('activate', e => e.waitUntil((async()=>{for(const k of await caches.keys())if(k.startsWith(PREFIX)&&k!==CACHE)await caches.delete(k);await self.clients.claim();})()));
 self.addEventListener('fetch', e => {
