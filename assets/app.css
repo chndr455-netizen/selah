@@ -18,8 +18,8 @@
 .welcome-message{width:100%;max-width:40rem;padding:12px 0}
 .welcome h1{font:650 clamp(2.25rem,8.8vw,4.5rem)/1.12 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance}
 .welcome .intro{font-size:1rem;line-height:1.65;color:#f8dcd2;max-width:22rem;margin:20px auto 28px;text-wrap:balance}
-.welcome .enter{display:inline-flex;align-items:center;justify-content:space-between;gap:48px;min-height:56px;width:min(100%,280px);padding:15px 24px;border:1px solid transparent;border-radius:18px;background:var(--baby-yellow);color:#54110f;font-size:1rem;line-height:1.5;font-weight:750;box-shadow:0 8px 32px #29060926;transition:background .2s,transform .2s}
-.welcome .enter span{font-size:1.35em;line-height:1}
+.welcome .enter{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:56px;width:min(100%,280px);padding:15px 56px;border:1px solid transparent;border-radius:18px;background:var(--baby-yellow);color:#54110f;font-size:1rem;line-height:1.5;font-weight:750;box-shadow:0 8px 32px #29060926;transition:background .2s,transform .2s}
+.welcome .enter span{position:absolute;inset-inline-end:24px;top:50%;transform:translateY(-50%);font-size:1.35em;line-height:1}
 .welcome .enter:hover{background:#fff28e;transform:translateY(-2px)}
 .welcome .enter:active{transform:translateY(0)}
 .welcome .enter:focus-visible{outline:2px solid #fff7ed;outline-offset:6px}

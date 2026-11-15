@@ -21,6 +21,13 @@ const output = path.join(__dirname, '../docs/review/welcome');
         assert.match(await page.locator('.welcome h1').innerText(), /Shalom,\s*Hamba Tuhan!/);
         assert.equal(await page.locator('.welcome .intro').innerText(), 'Selah, melayani dengan sungguh-sungguh bersama Tuhan.');
         assert.match(await page.locator('.welcome cite').innerText(), /Roma 12:11.*Parafrasa/);
+        const offset = await page.locator('#enterApp').evaluate(button => {
+          const range = document.createRange();
+          range.selectNodeContents(button.firstChild);
+          const text = range.getBoundingClientRect(), bounds = button.getBoundingClientRect();
+          return Math.abs((text.left + text.right - bounds.left - bounds.right) / 2);
+        });
+        assert(offset <= 1, 'Open label must be centered independently of the arrow');
         const layout = await page.locator('#welcome').evaluate(el => {
           const bounds = [...el.querySelectorAll('img,h1,p,button,.scripture')].map(x => x.getBoundingClientRect());
           return { fits: el.scrollHeight <= el.clientHeight + 1, horizontal: el.scrollWidth <= el.clientWidth,
