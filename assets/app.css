@@ -18,8 +18,7 @@
 .welcome-message{width:100%;max-width:40rem;padding:12px 0}
 .welcome h1{font:650 clamp(2.25rem,8.8vw,4.5rem)/1.12 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance}
 .welcome .intro{font-size:1rem;line-height:1.65;color:#f8dcd2;max-width:22rem;margin:20px auto 28px;text-wrap:balance}
-.welcome .enter{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:56px;width:min(100%,280px);padding:15px 56px;border:1px solid transparent;border-radius:18px;background:var(--baby-yellow);color:#54110f;font-size:1rem;line-height:1.5;font-weight:750;box-shadow:0 8px 32px #29060926;transition:background .2s,transform .2s}
-.welcome .enter span{position:absolute;inset-inline-end:24px;top:50%;transform:translateY(-50%);font-size:1.35em;line-height:1}
+.welcome .enter{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:56px;width:min(100%,180px);padding:15px 24px;border:1px solid transparent;border-radius:18px;background:var(--baby-yellow);color:#54110f;font-size:1rem;line-height:1.5;font-weight:750;box-shadow:0 8px 32px #29060926;transition:background .2s,transform .2s}
 .welcome .enter:hover{background:#fff28e;transform:translateY(-2px)}
 .welcome .enter:active{transform:translateY(0)}
 .welcome .enter:focus-visible{outline:2px solid #fff7ed;outline-offset:6px}
@@ -28,7 +27,6 @@
 .welcome .scripture h2{font-size:.625rem;line-height:1.5;font-weight:650;letter-spacing:.2em;text-transform:uppercase;color:#feed65;margin:0}
 .welcome .scripture blockquote{font:italic 1.0625rem/1.55 Georgia,serif;color:#f7ded3;margin:12px 0}
 .welcome .scripture cite{display:block;font-size:.6875rem;line-height:1.6;font-weight:600;font-style:normal;letter-spacing:.03em;color:#fff7ed}
-.welcome .scripture cite span{color:#edc1b4;font-weight:400}
 @keyframes welcome-light{from{opacity:.55}to{opacity:1}}
 @media(min-width:768px){.welcome{padding:calc(40px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-right,0px)) calc(40px + env(safe-area-inset-bottom,0px)) calc(40px + env(safe-area-inset-left,0px))}.welcome-inner{min-height:calc(100vh - 80px);min-height:calc(100dvh - 80px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}.welcome-identity{align-self:flex-start}.welcome-message{padding:24px 0}.welcome .intro{font-size:1.125rem;max-width:26rem}}
 @media(max-height:700px){.welcome-inner{gap:20px}.welcome-message{padding:0}.welcome .intro{margin:14px auto 22px}.welcome .scripture::before{margin-bottom:12px}.welcome .scripture blockquote{margin:8px 0}}

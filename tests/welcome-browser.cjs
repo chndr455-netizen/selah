@@ -20,14 +20,16 @@ const output = path.join(__dirname, '../docs/review/welcome');
         assert.equal(await page.locator('#appShell').evaluate(el => el.inert), true);
         assert.match(await page.locator('.welcome h1').innerText(), /Shalom,\s*Hamba Tuhan!/);
         assert.equal(await page.locator('.welcome .intro').innerText(), 'Selah, melayani dengan sungguh-sungguh bersama Tuhan.');
-        assert.match(await page.locator('.welcome cite').innerText(), /Roma 12:11.*Parafrasa/);
+        assert.equal(await page.locator('.welcome cite').innerText(), 'Kolose 3:23 (TB)');
+        assert.equal(await page.locator('.welcome blockquote').innerText(), 'Apa pun juga yang kamu perbuat, perbuatlah dengan segenap hatimu seperti untuk Tuhan dan bukan untuk manusia');
+        assert.equal(await page.locator('#enterApp').innerText(), 'Open');
         const offset = await page.locator('#enterApp').evaluate(button => {
           const range = document.createRange();
           range.selectNodeContents(button.firstChild);
           const text = range.getBoundingClientRect(), bounds = button.getBoundingClientRect();
           return Math.abs((text.left + text.right - bounds.left - bounds.right) / 2);
         });
-        assert(offset <= 1, 'Open label must be centered independently of the arrow');
+        assert(offset <= 1, 'Open label must be centered');
         const layout = await page.locator('#welcome').evaluate(el => {
           const bounds = [...el.querySelectorAll('img,h1,p,button,.scripture')].map(x => x.getBoundingClientRect());
           return { fits: el.scrollHeight <= el.clientHeight + 1, horizontal: el.scrollWidth <= el.clientWidth,
@@ -62,7 +64,7 @@ const output = path.join(__dirname, '../docs/review/welcome');
         await context.setOffline(true);
         await page.reload();
         await page.waitForFunction(() => document.activeElement.id === 'enterApp');
-        assert.match(await page.locator('.welcome cite').innerText(), /Roma 12:11/);
+        assert.match(await page.locator('.welcome cite').innerText(), /Kolose 3:23/);
         assert.equal(await page.evaluate(() => localStorage.getItem('selah.v03.state')), saved);
         await page.locator('#enterApp').click();
         await page.locator('[data-page="academy"]').click();

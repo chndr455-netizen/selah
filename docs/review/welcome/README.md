@@ -2,7 +2,7 @@
 
 App-shell version: **0.3.2** (increments the existing 0.3.1 release). Public catalog/content version and `assets/app.js` are unchanged.
 
-The welcome uses CSS gradients and a slow opacity animation, local system fonts, a smaller logo and a Baby Yellow action. Roma 12:11 is explicitly presented as a paraphrase. All visuals are cached with the existing app shell, without external dependencies.
+The welcome uses CSS gradients and a slow opacity animation, local system fonts, a smaller logo and a Baby Yellow action. The scripture uses the owner-supplied Kolose 3:23 text with TB attribution. Open is centered in a compact, arrow-free button. All visuals are cached with the existing app shell, without external dependencies.
 
 ## Screenshots
 
@@ -24,7 +24,7 @@ Chromium, CSS pixels, reduced motion; the visible outline shows initial keyboard
 - Reduced motion disables the light animation; normal motion enables it. Enlarged default text (root font size 32px) remains horizontally contained and all welcome content can be reached by scrolling.
 - Supplemental 320 × 400 check confirms vertical scrolling reaches the scripture and Open button.
 - At all four main sizes, offline reload retains the new welcome, 38-song library and dummy academy progress; saved storage is unchanged by welcome dismissal/reopening and reload.
-- Separate temporary fixture upgraded the actual 0.3.1 shell to 0.3.2: waiting/update notice, close/reopen activation, new yellow button and Roma 12:11, old cache cleanup and offline reload pass. A dummy local song-key edit and academy progress survive byte-for-byte in local storage.
+- Separate temporary fixture upgraded the actual 0.3.1 shell to 0.3.2: waiting/update notice, close/reopen activation, new welcome, old cache cleanup and offline reload pass. A dummy local song-key edit and academy progress survive byte-for-byte in local storage.
 - Only welcome markup/styles, viewport metadata and displayed app version changed in HTML/CSS. Song data, legacy baseline, app logic and other module markup remain unchanged.
 
 ## Reproduce browser checks
