@@ -1,6 +1,6 @@
 # Song Library — Panduan pengiriman konten ke Codex
 
-Copy the following form into a Codex task. Fill only what you know; use “belum diketahui” for uncertain details. For lyrics, include exact owner-approved text and documented publication authorization, or leave blank. Never infer unknown credits or musical values. Categories can overlap. English equivalents: O Opening/Pembukaan, P Praise/Pujian, S Sermon/Sebelum firman, G Giving/Persembahan, C Closing/Penutup. W/P type is separate from the category. Under the local six-slot service, W fits O/S/C, P fits P/G; mixed-purpose suggestions may be recorded but the setlist filters by both type and category.
+Copy the following form into a Codex task. Fill only what you know; use “belum diketahui” for uncertain details. For lyrics, include exact owner-approved text and documented publication authorization, or leave blank. Never infer unknown credits or musical values. Categories can overlap. English equivalents: O Opening/Pembukaan, P Praise/Pujian, S Sermon/Sebelum firman, G Giving/Persembahan, C Closing/Penutup. W/P type is separate from the category. For the six-song Ibadah Minggu starter, W suggests O/S/C and P suggests P/G. These are recommendations only: the Service Builder allows every library song in any segment.
 
 ```
 ACTION: ADD / EDIT (existing ID or exact title if editing)
