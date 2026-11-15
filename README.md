@@ -1,4 +1,4 @@
-# SELAH v0.3.1 — Fire & Foundation / PWA
+# SELAH v0.4.0 — Experience / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -20,6 +20,12 @@ Local add/edit/delete makes an overlay visible only on that browser/device. The 
 
 ## Publishing without editing code
 In Codex, send song information using `docs/CONTENT_GUIDE.md`. The agent should update only song content + content version and validate. Review PR diff, merge, then GitHub Pages publishes. Pages CMS is optional and not configured. App shell caches are versioned; users may need to close all SELAH tabs and reopen after an app update. Song JSON uses network-first with offline fallback. For an app release bump the manifest-related UI version, `data/version.json` and cache name in `sw.js`. No blanket cache clearing or local storage reset on updates.
+
+## Navigation (v0.4)
+
+Five persistent bottom tabs organize the existing modules: Beranda; Lagu (catalog + profiles/lyrics); Ibadah (setlist, structure, arrangements); Belajar (academy + spiritual foundation); Lainnya (operations, reflections, song management, settings/data). Original hashes such as `#library`, `#setlist`, `#academy`, `#faith`, `#operations`, `#reflection`, `#manage`, `#service` and `#arrange` still work. Song profiles use `#song/<encoded-id>`. Settings and data backups are available through the header gear or Lainnya. The lyric reader is a focused modal with its own back and text-size controls.
+
+Original home material remains under “Tentang pelayanan · Heart, Skill, Unity”. Public catalog/content and private data schemas remain unchanged. See [v0.4 review evidence](docs/review/v04/README.md) for screenshots, browser checks and device limitations.
 
 ## Verification
 ```sh

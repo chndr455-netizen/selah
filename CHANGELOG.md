@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 — 2026-11-15
+- Rebuilt the application shell around five persistent bottom tabs: Beranda, Lagu, Ibadah, Belajar and Lainnya, following the owner-supplied Experience Preview.
+- Introduced Canvas / Ink tokens, compact typography, local SVG icons, plain reading layouts and list-based song browsing. Original educational text and every existing module remain available.
+- Added a searchable home entry, featured catalog rows, grouped service/learning links and a dedicated settings/data page.
+- Reworked song profiles into Lirik / Aransemen / Makna views with accessible keyboard tabs, shareable song routes and a distraction-free lyric reader with text-size controls.
+- Preserved original hash routes, both storage keys, schema 1, all 38 public songs, the frozen migration baseline and catalog/local-overlay behavior. Browser back/forward now follows in-app navigation.
+- Updated app/UI/cache to 0.4.0, cached the local icon and ministry-reference content modules and adjusted PWA canvas colors. Existing installation and waiting-worker update behavior remain in place.
+- Added browser regression coverage and screenshots for 360×640, 390×844, 412×915 and 1440×900; see docs/review/v04/README.md. Physical Android/iOS installation and device safe-area checks remain manual.
+
 ## 0.3.2 — 2026-11-15
 - Redesigned only the welcome screen with an edge-to-edge Holy Fire background, soft animated light, compact logo, sans-serif hierarchy and Baby Yellow Open button.
 - Made the Open button compact (180px maximum), centered its label, removed the arrow and balanced the space above/below it between the subtitle and scripture.
