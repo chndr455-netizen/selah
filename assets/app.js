@@ -20,53 +20,77 @@ baseline=clone(SEED);state=fresh();if(saved){try{const working=validate(saved);l
 function save(){try{localStorage.setItem(KEY,JSON.stringify({...state,publishedBase:baseline}));storageOK=true}catch(e){storageOK=false}storageNotice()}
 function updateLibraryStatus(){const b=new Map(baseline.map(s=>[s.id,s]));const local=state.songs.filter(s=>!sameSong(b.get(s.id),s)).length;const removed=baseline.filter(s=>!state.songs.some(z=>z.id===s.id)).length;$('libraryStatus').textContent=`${libraryMessage} ${baseline.length} lagu publik · ${local} tambahan/perubahan lokal · ${removed} disembunyikan lokal.`;}
 function isLocalSong(s){return !sameSong(baseline.find(z=>z.id===s.id),s);}
-function storageNotice(){$('storageStatus').textContent=storageOK?'Penyimpanan lokal tersedia. Cadangkan data secara berkala.':'Penyimpanan lokal tidak tersedia atau data gagal dibaca; ekspor JSON sebelum menutup halaman.'}
-function notify(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(timer);timer=setTimeout(()=>$('toast').hidden=true,3200)}
+function storageNotice(){$('storageStatus').textContent=storageOK?'Tersimpan di perangkat ini.':'Penyimpanan lokal tidak tersedia atau data gagal dibaca; ekspor JSON sebelum menutup halaman.'}
+function notify(t){if($('libraryOptions').open){$('libraryActionStatus').textContent=t;return;}$('toast').textContent=t;$('toast').hidden=false;clearTimeout(timer);timer=setTimeout(()=>$('toast').hidden=true,3200)}
 function validate(x){if(!x||x.schema!==1||!Array.isArray(x.songs)||x.songs.length>10000||!x.set||!Array.isArray(x.set.slots)||x.set.slots.length!==6||!Array.isArray(x.checks)||x.checks.length!==CHECKS.length)throw Error('Format tidak sesuai');const ids=new Set();const strings=['title','artist','theme','notes','source','bpm','key','status','url'];const songs=x.songs.map(s=>{if(!s||typeof s.id!=='string'||!s.id||ids.has(s.id)||!['W','P'].includes(s.type)||!Array.isArray(s.cats)||!s.cats.length||s.cats.some(c=>!Object.hasOwn(CAT,c))||strings.some(k=>typeof s[k]!=='string')||!s.title.trim()||!['Kandidat','Dalam latihan','Siap'].includes(s.status))throw Error('Data lagu tidak valid');ids.add(s.id);return enrich({...s,url:safeUrl(s.url),cats:[...new Set(s.cats)]})});const set=x.set;if(['date','wl','theme','notes'].some(k=>typeof set[k]!=='string')||set.slots.some(s=>!s||typeof s.id!=='string'||typeof s.note!=='string'))throw Error('Setlist tidak valid');return {schema:1,songs,set:{date:set.date,wl:set.wl,theme:set.theme,notes:set.notes,slots:set.slots.map((s,i)=>({id:songs.some(z=>z.id===s.id&&z.cats.includes(SLOTS[i].c)&&z.type===SLOTS[i].t)?s.id:'',note:s.note}))},checks:x.checks.map(Boolean),lessons:Array.from({length:10},(_,i)=>Boolean(x.lessons?.[i])),reflections:Array.isArray(x.reflections)?x.reflections.filter(r=>r&&["id","date","role","good","improve","next"].every(k=>typeof r[k]==="string")):[]}}
 const tabForPage = {home:'home',library:'library',profile:'library',setlist:'setlist',service:'setlist',arrange:'setlist',academy:'academy',faith:'academy',more:'more',operations:'more',reflection:'more',manage:'more',settings:'more'};
 const routeAliases = {songs:'library',learn:'academy',devotion:'faith'};
 let profileReturn = 'library';
-function page(route, push=true) {
-  let id=routeAliases[route] || route;
+let activeRoute = '', routeAnimation;
+const scrollPositions = new Map();
+history.scrollRestoration = 'manual';
+function resolveRoute(route) {
+  let id=Object.hasOwn(routeAliases,route)?routeAliases[route]:route, songId=null;
   if(id.startsWith('song/')) {
-    let songId; try { songId=decodeURIComponent(id.slice(5)); } catch { songId=''; }
-    if(state.songs.some(s=>s.id===songId)) { renderProfile(songId); id='profile'; }
-    else { id='library'; route='library'; }
+    try { songId=decodeURIComponent(id.slice(5)); } catch { songId=''; }
+    if(state.songs.some(song=>song.id===songId)) id='profile';
+    else { id='library'; songId=null; }
   }
-  if(!document.getElementById(id)?.classList.contains('page') || (id==='profile'&&!profileId)) { id='home'; route='home'; }
-  document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===id));
+  if(!document.getElementById(id)?.classList.contains('page') || (id==='profile'&&!songId)) id='home';
+  return {id,songId,route:id==='profile'?'song/'+encodeURIComponent(songId):id};
+}
+function page(route, push=true) {
+  const next=resolveRoute(route);
+  // popstate and hashchange may describe the same history traversal. Handle it once.
+  if(next.route===activeRoute){if(location.hash!=='#'+next.route)history.replaceState(history.state,'','#'+next.route);return;}
+  const previous=activeRoute;
+  if(previous)scrollPositions.set(previous,window.scrollY);
+  routeAnimation?.cancel();
+  if(next.songId)renderProfile(next.songId);
+  document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id===next.id));
   document.querySelectorAll('.nav button').forEach(el=>{
-    const active=el.dataset.page===tabForPage[id];
+    const active=el.dataset.page===tabForPage[next.id];
     el.classList.toggle('active',active);
     if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');
   });
-  if(id==='library')renderSongs();
-  if(id==='setlist')renderSet();
-  if(id==='manage')renderChecks();
-  window.scrollTo(0,0);
-  const hash='#'+(id==='profile'?'song/'+encodeURIComponent(profileId):id);
-  if(location.hash!==hash)history[push?'pushState':'replaceState'](null,'',hash);
-  const heading=document.querySelector('.page.active h1');
+  if(location.hash!=='#'+next.route) {
+    const entry={...history.state,selahFrom:previous};
+    history[push?'pushState':'replaceState'](entry,'','#'+next.route);
+  }
+  activeRoute=next.route;
+  const target=document.querySelector('.page.active'), heading=target.querySelector('h1');
   document.title='SELAH · '+(heading?.textContent||'Music Ministry');
-  heading?.focus({preventScroll:true});
+  let focusTarget=heading;
+  if(previous.startsWith('song/') && ['library','home'].includes(next.id)) {
+    focusTarget=[...target.querySelectorAll('[data-profile]')].find(el=>el.dataset.profile===profileId)||heading;
+  }
+  focusTarget?.focus({preventScroll:true});
+  window.scrollTo({top:scrollPositions.get(next.route)||0,behavior:'instant'});
+  if(previous && !matchMedia('(prefers-reduced-motion: reduce)').matches && target.animate) {
+    routeAnimation=target.animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'translateY(0)'}],{duration:200,easing:'cubic-bezier(.2,.7,.2,1)'});
+  }
 }
-function renderFlow(){const markup=SLOTS.map((s,i)=>`<div class="step"><small>${String(i+1).padStart(2,'0')} · ${esc(s.en)}</small><strong>${esc(s.n)}</strong><span class="tag ${s.t.toLowerCase()}">${s.t==='W'?'W · Worship':'P · Praise'}</span></div>`).join('');$('homeFlow').innerHTML=markup;$('serviceFlow').innerHTML=markup;$('serviceRows').innerHTML=SLOTS.map(s=>`<tr><td><strong>${esc(s.n)}</strong> <span class="tag ${s.t.toLowerCase()}">${s.t}</span></td><td>${esc(s.aim)}</td><td>${s.bpm}</td><td>${s.energy}</td><td>${esc(s.transition)}</td></tr>`).join('');$('sourceList').innerHTML=Object.values(SRC).map(([t,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a></li>`).join('')}
+function backTo(route) {
+  if(history.state?.selahFrom===route)history.back();
+  else page(route);
+}
+function syncLocation(){page(location.hash.slice(1)||'home',false);}
+window.addEventListener('popstate',syncLocation);
+window.addEventListener('hashchange',syncLocation);
+function renderFlow(){const markup=SLOTS.map((s,i)=>`<div class="step"><small>${String(i+1).padStart(2,'0')} · ${esc(s.en)}</small><strong>${esc(s.n)}</strong><span class="tag ${s.t.toLowerCase()}">${s.t==='W'?'W · Worship':'P · Praise'}</span></div>`).join('');$('serviceFlow').innerHTML=markup;$('serviceRows').innerHTML=SLOTS.map(s=>`<tr><td><strong>${esc(s.n)}</strong> <span class="tag ${s.t.toLowerCase()}">${s.t}</span></td><td>${esc(s.aim)}</td><td>${s.bpm}</td><td>${s.energy}</td><td>${esc(s.transition)}</td></tr>`).join('');$('sourceList').innerHTML=Object.values(SRC).map(([t,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a></li>`).join('')}
 function songRow(s) {
-  return `<button class="song-row song" data-profile="${esc(s.id)}"><span class="songicon ${s.type.toLowerCase()}">${icon('music')}</span><span class="rowtext"><strong>${esc(s.title)}${isLocalSong(s)?'<span class="tag local-label">Lokal</span>':''}</strong><small>${esc(s.artist|| (s.type==='P'?'Praise':'Worship'))}${s.theme?' · '+esc(s.theme):''}</small></span>${icon('chevron')}</button>`;
+  return `<button class="song-row song" data-profile="${esc(s.id)}"><span class="songicon ${s.type.toLowerCase()}">${icon('music')}</span><span class="rowtext"><strong>${esc(s.title)}${isLocalSong(s)?'<span class="tag local-label">Lokal</span>':''}</strong><small>${esc(s.artist|| (s.type==='P'?'Praise':'Worship'))}${s.key?' · '+esc(s.key):''}</small></span>${icon('chevron')}</button>`;
 }
 function renderSongs(){
-  updateLibraryStatus();
   const q=$('search').value.toLocaleLowerCase('id').trim(),type=$('typeFilter').value,st=$('statusFilter').value;
   const candidates=state.songs.filter(s=>(!q||[s.title,s.artist,s.theme,s.notes].join(' ').toLocaleLowerCase('id').includes(q))&&(!type||s.type===type)&&(!st||s.status===st));
-  $('chips').innerHTML=[['','Semua'],...Object.entries(CAT)].map(([k,v])=>`<button class="chip ${activeCat===k?'active':''}" data-cat="${k}" aria-pressed="${activeCat===k}">${esc(v)} · ${candidates.filter(s=>!k||s.cats.includes(k)).length}</button>`).join('');
+  if(!$('chips').children.length)$('chips').innerHTML=[['','Semua'],...Object.entries(CAT)].map(([key,label])=>`<button class="chip" data-cat="${key}">${esc(label)}</button>`).join('');
+  $('chips').querySelectorAll('button').forEach(button=>{const selected=button.dataset.cat===activeCat;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));});
   const results=candidates.filter(s=>!activeCat||s.cats.includes(activeCat)).sort((a,b)=>a.title.localeCompare(b.title,'id'));
-  $('homeCount').textContent=state.songs.length;
-  $('homeSongCount').textContent=state.songs.length;
   $('resultCount').textContent=`${results.length} dari ${state.songs.length} lagu`;
   $('songGrid').innerHTML=results.map(songRow).join('')||'<div class="empty">Tidak ada lagu yang cocok. Ubah filter atau tambahkan lagu.</div>';
-  $('featuredSongs').innerHTML=state.songs.slice(0,3).map(songRow).join('');
 }
-function openSong(id){editing=id||null;let s=state.songs.find(z=>z.id===id)||{title:'',artist:'',type:'W',cats:[],theme:'',key:'',bpm:'',status:'Kandidat',url:'',notes:''};$('dialogTitle').textContent=id?'Detail / edit lagu':'Tambah lagu';for(const [k,v] of Object.entries({fTitle:s.title,fArtist:s.artist,fType:s.type,fTheme:s.theme,fKey:s.key,fBpm:s.bpm,fStatus:s.status,fUrl:s.url,fNotes:s.notes}))$(k).value=v;$('fCats').innerHTML=Object.entries(CAT).map(([k,v])=>`<label><input type="checkbox" name="category" value="${k}" ${s.cats.includes(k)?'checked':''}>${esc(v)}</label>`).join('');for(const [field,k] of Object.entries(EXTRA))$(field).value=s[k]||'';$('deleteSong').hidden=!id;$('formMsg').textContent='';if(typeof $('songDialog').showModal==='function')$('songDialog').showModal();else $('songDialog').setAttribute('open','')}
+function openSong(id){if($('libraryOptions').open)$('libraryOptions').close();editing=id||null;let s=state.songs.find(z=>z.id===id)||{title:'',artist:'',type:'W',cats:[],theme:'',key:'',bpm:'',status:'Kandidat',url:'',notes:''};$('dialogTitle').textContent=id?'Detail / edit lagu':'Tambah lagu';for(const [k,v] of Object.entries({fTitle:s.title,fArtist:s.artist,fType:s.type,fTheme:s.theme,fKey:s.key,fBpm:s.bpm,fStatus:s.status,fUrl:s.url,fNotes:s.notes}))$(k).value=v;$('fCats').innerHTML=Object.entries(CAT).map(([k,v])=>`<label><input type="checkbox" name="category" value="${k}" ${s.cats.includes(k)?'checked':''}>${esc(v)}</label>`).join('');for(const [field,k] of Object.entries(EXTRA))$(field).value=s[k]||'';$('deleteSong').hidden=!id;$('formMsg').textContent='';if(typeof $('songDialog').showModal==='function')$('songDialog').showModal();else $('songDialog').setAttribute('open','')}
 function closeSong(){if(typeof $('songDialog').close==='function')$('songDialog').close();else $('songDialog').removeAttribute('open')}
 function reconcile(){state.set.slots.forEach((s,i)=>{if(s.id&&!state.songs.some(z=>z.id===s.id&&z.cats.includes(SLOTS[i].c)&&z.type===SLOTS[i].t))s.id=''})}
 function renderSet(){for(const [id,k] of [['setDate','date'],['setWL','wl'],['setTheme','theme'],['setNotes','notes']])$(id).value=state.set[k];$('slots').innerHTML=SLOTS.map((s,i)=>{const opts=state.songs.filter(z=>z.cats.includes(s.c)&&z.type===s.t).sort((a,b)=>a.title.localeCompare(b.title,'id'));return `<div class="slot"><div class="slotlabel">${i+1}. ${esc(s.n)} <span class="tag ${s.t.toLowerCase()}">${s.t}</span><small>${esc(s.en)}</small></div><div class="field"><label for="slot${i}">Lagu</label><select id="slot${i}" data-slot="${i}"><option value="">Pilih lagu...</option>${opts.map(z=>`<option value="${esc(z.id)}" ${state.set.slots[i].id===z.id?'selected':''}>${esc(z.title)}${z.status==='Siap'?' ✓':''}</option>`).join('')}</select><div class="note" id="slotmeta${i}"></div></div><div class="field slotnote"><label for="slotnote${i}">Catatan khusus</label><input id="slotnote${i}" data-slotnote="${i}" value="${esc(state.set.slots[i].note)}" placeholder="Key / cue / form"></div></div>`}).join('');updateSummary()}
@@ -74,39 +98,67 @@ function updateSummary(){let chosen=state.set.slots.map(s=>state.songs.find(z=>z
 function setText(){return ['SETLIST IBADAH | SELAH',`Tanggal: ${state.set.date||'—'}`,`WL: ${state.set.wl||'—'}`,`Tema: ${state.set.theme||'—'}`,'',...SLOTS.map((s,i)=>{const z=state.songs.find(z=>z.id===state.set.slots[i].id);return `${i+1}. ${s.n} (${s.t}): ${z?z.title:'—'}${z?` | Key: ${z.key||'—'} | BPM: ${z.bpm||'—'}`:''}${state.set.slots[i].note?' | '+state.set.slots[i].note:''}`}),`\nBriefing: ${state.set.notes||'—'}`].join('\n')}
 function download(name,content,type){let u=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
 function renderChecks(){$('checklist').innerHTML=CHECKS.map((v,i)=>`<label class="checkline"><input type="checkbox" data-check="${i}" ${state.checks[i]?'checked':''}> <span>${esc(v)}</span></label>`).join('');$('checkProgress').textContent=`${state.checks.filter(Boolean).length}/${CHECKS.length} selesai`}
-function renderAll(){if(profileId){if(state.songs.some(s=>s.id===profileId))renderProfile(profileId);else{profileId=null;if(document.querySelector('#profile.active'))page('library')}}renderSongs();renderSet();renderChecks();renderAcademy();renderReflections();storageNotice()}
+function renderAll(){
+  if(activeRoute.startsWith('song/')){
+    if(state.songs.some(song=>song.id===profileId))renderProfile(profileId);
+    else {profileId=null;page('library');}
+  }
+  updateLibraryStatus();$('homeCount').textContent=state.songs.length;
+  renderSongs();
+  $('featuredSongs').innerHTML=state.songs.slice(0,3).map(songRow).join('');
+  renderSet();renderChecks();renderAcademy();renderReflections();storageNotice();
+}
 
-let profileId=null, roleFilter='all';
+let profileId=null, profileSnapshot=null, roleFilter='all';
 function showProfile(id){
   profileReturn=document.querySelector('.page.active')?.id==='home'?'home':'library';
   page('song/'+encodeURIComponent(id));
 }
 function renderProfile(id){
   const s=state.songs.find(x=>x.id===id);if(!s)return;
-  profileId=id;
+  $('closeProfile').textContent=profileReturn==='home'?'← Beranda':'← Lagu';
+  if(profileId===id && sameSong(profileSnapshot,s))return;
+  const selected=profileId===id?document.querySelector('[data-profiletab][aria-selected="true"]')?.dataset.profiletab:'lyrics';
+  profileId=id;profileSnapshot=clone(s);
   $('profileTitle').textContent=s.title;
   const link=safeUrl(s.url)||(Object.hasOwn(SRC,s.source)?SRC[s.source][1]:'');
-  $('profileSummary').innerHTML=`<p class="muted">${esc(s.artist||'Versi belum dikonfirmasi')} · ${esc(s.status)}${isLocalSong(s)?' · Lokal':''}</p><div class="chips"><span class="tag ${s.type.toLowerCase()}">${s.type==='W'?'Worship':'Praise'}</span>${s.cats.map(c=>`<span class="tag">${esc(CAT[c])}</span>`).join('')}</div>`;
+  $('profileSummary').innerHTML=`<p class="muted">${s.artist?esc(s.artist)+' · ':''}${esc(s.status)}${isLocalSong(s)?' · Lokal':''}</p><div class="chips"><span class="tag ${s.type.toLowerCase()}">${s.type==='W'?'Worship':'Praise'}</span>${s.cats.map(c=>`<span class="tag">${esc(CAT[c])}</span>`).join('')}</div>`;
   $('profileBody').innerHTML=`<div class="profileFacts">${[['Nada dasar',s.key],['BPM',s.bpm],['Birama',s.meter]].map(([k,v])=>`<div><strong>${esc(v||'—')}</strong><small>${k}</small></div>`).join('')}</div>
   <div class="profile-tabs" role="tablist" aria-label="Profil lagu">${[['lyrics','Lirik'],['arrange','Aransemen'],['meaning','Makna']].map(([key,label],i)=>`<button id="tab-${key}" role="tab" data-profiletab="${key}" aria-controls="panel-${key}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${label}</button>`).join('')}</div>
-  <section id="panel-lyrics" role="tabpanel" aria-labelledby="tab-lyrics" tabindex="0"><div class="profileLyrics">${esc(s.lyrics||'Belum ada lirik. Tambahkan teks yang berizin melalui Edit profil.')}</div>${s.rights?`<p class="note">Sumber / izin: ${esc(s.rights)}</p>`:''}<div class="actions"><button class="btn" id="readLyrics">Baca tanpa gangguan</button></div></section>
+  <section id="panel-lyrics" role="tabpanel" aria-labelledby="tab-lyrics" tabindex="0"><div class="profileLyrics">${esc(s.lyrics||'Lirik belum tersedia. Tambahkan melalui Edit.')}</div>${s.rights?`<p class="note">Sumber / izin: ${esc(s.rights)}</p>`:''}<div class="actions"><button class="btn" id="readLyrics">Baca tanpa gangguan</button></div></section>
   <section id="panel-arrange" role="tabpanel" aria-labelledby="tab-arrange" tabindex="0" hidden><div class="profileSection"><h2>Aransemen</h2><p><strong>Struktur:</strong> ${esc(s.form||'Belum ditetapkan')}</p><p>${esc(s.notes||'Belum ada catatan.')}</p></div></section>
   <section id="panel-meaning" role="tabpanel" aria-labelledby="tab-meaning" tabindex="0" hidden><div class="profileSection"><h2>Makna &amp; dasar Alkitab</h2><p>Tema: ${esc(s.theme||'—')}</p><p>${esc(s.meaning||'Refleksi detail belum diisi.')}</p><p class="ref">${esc(s.bible||'Rujukan belum diisi')}</p><p class="note">Rujukan tematik untuk direnungkan, bukan tafsiran resmi pencipta lagu.</p></div></section>
   ${link?`<div class="profileSection"><a href="${esc(link)}" target="_blank" rel="noopener noreferrer">${s.url?'Buka referensi versi':'Buka sumber katalog'}</a></div>`:''}`;
-  $('closeProfile').textContent=profileReturn==='home'?'← Beranda':'← Pustaka Lagu';
+  selectProfileTab(selected||'lyrics');
 }
 function selectProfileTab(key){
   document.querySelectorAll('[data-profiletab]').forEach(el=>{const active=el.dataset.profiletab===key;el.setAttribute('aria-selected',String(active));el.tabIndex=active?0:-1;document.getElementById(el.getAttribute('aria-controls')).hidden=!active;});
 }
 let lyricSize=22;
-function readLyrics(){const song=state.songs.find(s=>s.id===profileId);if(!song)return;$('readerTitle').textContent=song.title;$('readerLyrics').textContent=song.lyrics||'Belum ada lirik. Tambahkan teks yang berizin melalui Edit profil.';$('lyricsDialog').showModal();}
-function renderAcademy(){document.querySelectorAll('[data-lesson]').forEach(el=>el.checked=Boolean(state.lessons[Number(el.dataset.lesson)]));document.querySelectorAll('.lesson').forEach(el=>el.hidden=!(roleFilter==='all'||el.dataset.role==='all'||el.dataset.role===roleFilter));$('academyProgress').textContent=`${state.lessons.filter(Boolean).length} dari 10 materi ditandai telah dipelajari. Progres pribadi, tersimpan lokal.`;document.querySelectorAll('[data-rolefilter]').forEach(b=>{b.classList.toggle('active',b.dataset.rolefilter===roleFilter);b.setAttribute('aria-pressed',b.dataset.rolefilter===roleFilter)})}
+function readLyrics(){const song=state.songs.find(s=>s.id===profileId);if(!song)return;$('readerTitle').textContent=song.title;$('readerLyrics').textContent=song.lyrics||'Lirik belum tersedia. Tambahkan melalui Edit.';$('lyricsDialog').showModal();}
+function renderAcademy(){document.querySelectorAll('[data-lesson]').forEach(el=>el.checked=Boolean(state.lessons[Number(el.dataset.lesson)]));document.querySelectorAll('.lesson').forEach(el=>el.hidden=!(roleFilter==='all'||el.dataset.role==='all'||el.dataset.role===roleFilter));$('academyProgress').textContent=`${state.lessons.filter(Boolean).length}/10 materi dipelajari`;document.querySelectorAll('[data-rolefilter]').forEach(b=>{b.classList.toggle('active',b.dataset.rolefilter===roleFilter);b.setAttribute('aria-pressed',b.dataset.rolefilter===roleFilter)})}
 function renderReflections(){$('refList').innerHTML=state.reflections.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<article class="panel refcard"><p class="eyebrow">${esc(r.date)} · ${esc(r.role)}</p><h3>Yang berjalan baik</h3><p>${esc(r.good||'—')}</p><h3 style="margin-top:12px">Yang perlu diperbaiki</h3><p>${esc(r.improve||'—')}</p><h3 style="margin-top:12px">Langkah berikutnya</h3><p>${esc(r.next)}</p><button class="btn danger" data-delref="${esc(r.id)}">Hapus catatan</button></article>`).join('')||'<div class="empty">Belum ada catatan refleksi.</div>'}
 
 injectIcons();
 document.querySelector('.skip-link').addEventListener('click',e=>{e.preventDefault();$('mainContent').focus();});
 await load();renderFlow();renderAll();page(location.hash.slice(1)||'home',false);
-document.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.page||b.dataset.go)page(b.dataset.page||b.dataset.go);if(b.hasAttribute('data-cat')){activeCat=b.dataset.cat;renderSongs()}if(b.dataset.edit)openSong(b.dataset.edit)});window.addEventListener('hashchange',()=>page(location.hash.slice(1)||'home',false));window.addEventListener('popstate',()=>page(location.hash.slice(1)||'home',false));
+function handleAction(e){
+  const button=e.target.closest('button');if(!button)return;
+  if(button.hasAttribute('data-search')){page('library');$('search').focus({preventScroll:true});return;}
+  if(button.dataset.page||button.dataset.go){const route=button.dataset.page||button.dataset.go;if(button.classList.contains('back'))backTo(route);else page(route);return;}
+  if(button.hasAttribute('data-cat')){activeCat=button.dataset.cat;renderSongs();return;}
+  if(button.dataset.profile){showProfile(button.dataset.profile);return;}
+  if(button.dataset.profiletab){selectProfileTab(button.dataset.profiletab);return;}
+  if(button.id==='readLyrics'){readLyrics();return;}
+  if(button.dataset.rolefilter){roleFilter=button.dataset.rolefilter;renderAcademy();return;}
+  if(button.dataset.delref&&confirm('Hapus catatan refleksi ini?')){state.reflections=state.reflections.filter(r=>r.id!==button.dataset.delref);save();renderReflections();return;}
+  if(button.dataset.edit)openSong(button.dataset.edit);
+}
+document.addEventListener('click',handleAction);
+$('openLibraryOptions').onclick=()=>{$('libraryActionStatus').textContent='';$('libraryOptions').showModal();$('openLibraryOptions').setAttribute('aria-expanded','true')};
+$('libraryOptions').addEventListener('close',()=>{$('openLibraryOptions').setAttribute('aria-expanded','false')});
+$('songDialog').addEventListener('close',()=>{(activeRoute.startsWith('song/')?$('editProfile'):$('openLibraryOptions')).focus({preventScroll:true})});
+$('closeLibraryOptions').onclick=$('applyLibraryOptions').onclick=()=>$('libraryOptions').close();
 $('search').addEventListener('input',renderSongs);$('typeFilter').addEventListener('change',renderSongs);$('statusFilter').addEventListener('change',renderSongs);$('addSong').onclick=()=>openSong();$('closeDialog').onclick=closeSong;
 $('songForm').onsubmit=e=>{e.preventDefault();let title=$('fTitle').value.trim(),cats=[...$('fCats').querySelectorAll('input:checked')].map(x=>x.value),url=$('fUrl').value.trim();if(!title||!cats.length){$('formMsg').textContent='Judul dan minimal satu fungsi lagu wajib diisi.';return}if(url&&!safeUrl(url)){$('formMsg').textContent='Gunakan tautan http atau https.';return}let old=state.songs.find(s=>s.id===editing);let song={id:editing||('u'+(globalThis.crypto?.randomUUID?.()||Date.now().toString(36)+Math.random().toString(36).slice(2))),title,artist:$('fArtist').value.trim(),type:$('fType').value,cats,theme:$('fTheme').value.trim(),key:$('fKey').value.trim(),bpm:$('fBpm').value,status:$('fStatus').value,url:safeUrl(url),notes:$('fNotes').value.trim(),source:old?.source||''};for(const [field,k] of Object.entries(EXTRA))song[k]=$(field).value.trim();if(old)state.songs[state.songs.indexOf(old)]=song;else state.songs.push(song);reconcile();save();closeSong();renderAll();notify('Lagu disimpan di perangkat, bukan dipublikasikan. Periksa setlist jika kategori berubah.')};
 $('deleteSong').onclick=()=>{if(editing&&confirm('Hapus lagu ini? Lagu akan dilepas dari setlist aktif.')){state.songs=state.songs.filter(s=>s.id!==editing);reconcile();save();closeSong();renderAll();notify('Lagu dihapus.')}};
@@ -115,14 +167,12 @@ $('copySet').onclick=async()=>{try{await navigator.clipboard.writeText(setText()
 $('checklist').addEventListener('change',e=>{if(e.target.hasAttribute('data-check')){state.checks[Number(e.target.dataset.check)]=e.target.checked;save();$('checkProgress').textContent=`${state.checks.filter(Boolean).length}/${CHECKS.length} selesai`}});$('resetChecks').onclick=()=>{state.checks=CHECKS.map(()=>false);save();renderChecks()};$('exportAll').onclick=()=>download('selah-backup.json',JSON.stringify({...state,publishedBase:baseline},null,2),'application/json');$('importAll').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{let file=e.target.files[0];if(!file)return;try{let raw=JSON.parse(await file.text());let candidate=validate(raw);let oldBase=Array.isArray(raw.publishedBase)?checkedCatalog(raw.publishedBase):await fetchCatalog('./data/legacy-v02.json').catch(()=>clone(baseline));if(publishedAvailable)candidate.songs=mergeCatalog(oldBase,candidate.songs,baseline);if(confirm(`Impor ${candidate.songs.length} lagu? Ini mengganti data lokal saat ini.`)){state=candidate;reconcile();save();renderAll();notify('Cadangan diimpor.')}}catch(err){notify('Impor gagal: format cadangan tidak valid.')}finally{e.target.value=''}};
 $('exportCsv').onclick=()=>{const cell=v=>'"'+String(v??'').replace(/^[=+\-@\t\r]/,"'$&").replace(/"/g,'""')+'"';let rows=[['Judul','Versi','Jenis','Kategori','Tema','Key','BPM','Status','Catatan','Tautan','Birama','Struktur','Rujukan Alkitab','Makna'],...state.songs.map(s=>[s.title,s.artist,s.type,s.cats.map(c=>CAT[c]).join('; '),s.theme,s.key,s.bpm,s.status,s.notes,s.url||(Object.hasOwn(SRC,s.source)?SRC[s.source][1]:''),s.meter,s.form,s.bible,s.meaning])];download('pustaka-lagu.csv','\ufeff'+rows.map(r=>r.map(cell).join(',')).join('\r\n'),'text/csv;charset=utf-8')};$('resetAll').onclick=()=>{if(confirm('Reset SEMUA data? Lagu tambahan, perubahan, setlist dan checklist akan hilang. Ekspor cadangan terlebih dahulu.')){state=fresh();baseline=clone(SEED);save();renderAll();notify('Data awal dipulihkan.')}};
 
-$('closeProfile').onclick=()=>page(profileReturn);
+$('closeProfile').onclick=()=>backTo(profileReturn);
 $('editProfile').onclick=()=>openSong(profileId);
 $('closeLyrics').onclick=()=>$('lyricsDialog').close();
 function resizeLyrics(delta){lyricSize=Math.max(16,Math.min(36,lyricSize+delta));$('readerLyrics').style.setProperty('--lyrics-size',lyricSize+'px');}
 $('smallerLyrics').onclick=()=>resizeLyrics(-2);$('largerLyrics').onclick=()=>resizeLyrics(2);
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-search')){page('library');$('search').focus()}if(b.dataset.profiletab)selectProfileTab(b.dataset.profiletab);if(b.id==='readLyrics')readLyrics();});
 document.addEventListener('keydown',e=>{const tab=e.target.closest('[data-profiletab]');if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('[data-profiletab]')];let i=tabs.indexOf(tab);i=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length;selectProfileTab(tabs[i].dataset.profiletab);tabs[i].focus();});
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.profile)showProfile(b.dataset.profile);if(b.dataset.rolefilter){roleFilter=b.dataset.rolefilter;renderAcademy()}if(b.dataset.delref&&confirm('Hapus catatan refleksi ini?')){state.reflections=state.reflections.filter(r=>r.id!==b.dataset.delref);save();renderReflections()}});
 $('lessons').addEventListener('change',e=>{if(e.target.hasAttribute('data-lesson')){state.lessons[Number(e.target.dataset.lesson)]=e.target.checked;save();renderAcademy()}});
 const localToday=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};$('refDate').value=localToday();$('reflectionForm').onsubmit=e=>{e.preventDefault();let next=$('refNext').value.trim();if(!next){notify('Isi langkah nyata berikutnya.');return}state.reflections.push({id:globalThis.crypto?.randomUUID?.()||String(Date.now())+Math.random(),date:$('refDate').value,role:$('refRole').value,good:$('refGood').value.trim(),improve:$('refImprove').value.trim(),next});save();$('refGood').value=$('refImprove').value=$('refNext').value='';renderReflections();notify('Refleksi tersimpan.')};
 
