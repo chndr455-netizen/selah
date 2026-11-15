@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.1 — 2026-11-15
+- Reused the song editor with primary title/creator/key/type/category/lyrics fields and an Informasi Lanjutan disclosure. Kept Simpan Lokal independent from Ekspor Pengajuan (.json) and Salin Pengajuan.
+- Added offline single-song ADD/EDIT submissions with schema version, timestamp, observed public content version, stable public IDs, original/proposed values and unchanged/modified/cleared field statuses. Local-only songs submit as ADD; omitted fields never imply deletion.
+- Lyrics and permission text require separate explicit opt-ins; permission claims remain flagged for review. Export/copy never saves the draft or publishes, and never serializes unrelated songs or private application state.
+- Preserved catalog content, IDs, storage keys, schema-1 imports, schema-2 backups and all service-planning data. Added optional published-baseline version metadata; unknown versions are flagged rather than invented.
+- Updated app/UI/cache to 0.5.1, precached the submission module, documented review format and added validation/browser/offline checks. See docs/review/v051/README.md.
+
 ## 0.5.0 — 2026-11-15
 - Replaced fixed service slots with a flexible local Service Builder; renamed the guide to Alur Ibadah. The six-song Sunday plan remains the initial template, with editable Praise & Worship Night, Ibadah Khusus and blank starters.
 - Added arbitrary segment names/order, optional Worship/Praise/Medley/Instrumental/Doa/Firman Tuhan/Perjamuan Kudus/custom segments, trusted pointer/touch sorting and accessible editor/keyboard reordering.

@@ -388,3 +388,18 @@ button:active{transform:scale(.97);opacity:.82}
 @media print{#setlist>*{display:none!important}#setlist>.service-print{display:block!important;white-space:pre-wrap;overflow-wrap:anywhere;font:12pt/1.6 system-ui,sans-serif;color:black}.service-sheet{display:none!important}}
 #segmentForm>.builder-actions{display:grid;grid-template-columns:1fr 1fr}
 #segmentForm>.builder-actions>.primary{grid-column:1/-1}
+/* One editor, independent local-save and submission actions. */
+#songDialog{padding:20px;max-height:92vh;max-height:92dvh}
+.editor-advanced{margin:16px 0;border-block:1px solid var(--line)}
+.editor-advanced>summary{min-height:44px;padding:12px 0;font-size:14px}
+.submission-options{display:flex;flex-wrap:wrap;gap:8px 18px;margin:12px 0}
+.submission-options legend{font-size:12px;color:var(--muted);margin-bottom:5px}
+.submission-options label{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px}
+.submission-options input{width:22px;height:22px;min-height:0;accent-color:var(--red)}
+.submission-notice{font-size:12px;line-height:1.65;margin:14px 0}
+.editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.editor-actions>.primary{grid-column:1/-1}
+.editor-actions>.danger{grid-column:1/-1;justify-self:start}
+.editor-actions>.btn{white-space:normal}
+#submissionStatus:empty,#formMsg:empty{display:none}
+#submissionStatus{color:var(--red);font-size:13px;margin-top:14px}

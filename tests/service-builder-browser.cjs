@@ -1,5 +1,5 @@
 const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
-const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/';const output=path.join(__dirname,'../docs/review/v050');
+const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/';const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v050');
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});try{
  for(const[width,height]of [[360,640],[390,844],[412,915],[1440,900]]){const c=await b.newContext({viewport:{width,height},reducedMotion:'reduce',permissions:['clipboard-read','clipboard-write']});try{
  const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());const data=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('selah.v03.state')));const close=async id=>{await p.locator(`#${id} [data-builder="close"]`).click()};const actions=()=>p.locator('#openSetActions').click();const saveSegment=()=>p.locator('#segmentForm button[type="submit"]').click();const useTemplate=async id=>{await p.locator('#chooseTemplate').click();await p.locator(`[data-builder="use-template"][data-id="${id}"]`).click()};
