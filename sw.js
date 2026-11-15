@@ -1,6 +1,6 @@
 /* Increment on shell/UI release; content JSON uses network-first. */
 const PREFIX = 'selah-pwa-' + new URL(self.registration.scope).pathname + '-';
-const CACHE = PREFIX + '0.3.1';
+const CACHE = PREFIX + '0.3.2';
 const root = self.registration.scope;
 const shell = ['./','./index.html','./assets/app.css','./assets/app.js','./assets/logo.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/icon-maskable.png','./manifest.webmanifest','./data/songs.json','./data/legacy-v02.json','./data/version.json'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(shell.map(x=>new Request(new URL(x,root),{cache:'reload'}))))));

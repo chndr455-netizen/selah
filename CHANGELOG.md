@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 — 2026-11-15
+- Redesigned only the welcome screen with an edge-to-edge Holy Fire background, soft animated light, compact logo, sans-serif hierarchy and Baby Yellow Open button.
+- Integrated Roma 12:11 as a clearly labeled paraphrase, with no separate scripture card.
+- Added dynamic viewport sizing, safe-area padding, small-screen scrolling and reduced-motion support; all visuals remain available offline.
+- Synchronized app, displayed and service-worker cache versions; song catalog and local-data behavior remain unchanged.
+
 ## 0.3.1 — 2026-11-15
 - Fixed portable PWA identity under GitHub Pages project paths by omitting the explicit manifest ID; identity now defaults to start URL.
 - Added manifest/subpath and displayed-version regression checks; synchronized UI, app and cache versions.
