@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const url = process.env.SELAH_TEST_URL || 'http://127.0.0.1:8765/selah/';
-const output = path.join(__dirname, '../docs/review/welcome');
+const output = process.env.SELAH_SCREENSHOT_DIR || path.join(__dirname, '../docs/review/welcome');
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox'] });
   try {

@@ -1,4 +1,4 @@
-# SELAH v0.4.0 — Experience / PWA
+# SELAH v0.4.1 — Simplicity & Fluidity / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -25,7 +25,9 @@ In Codex, send song information using `docs/CONTENT_GUIDE.md`. The agent should 
 
 Five persistent bottom tabs organize the existing modules: Beranda; Lagu (catalog + profiles/lyrics); Ibadah (setlist, structure, arrangements); Belajar (academy + spiritual foundation); Lainnya (operations, reflections, song management, settings/data). Original hashes such as `#library`, `#setlist`, `#academy`, `#faith`, `#operations`, `#reflection`, `#manage`, `#service` and `#arrange` still work. Song profiles use `#song/<encoded-id>`. Settings and data backups are available through the header gear or Lainnya. The lyric reader is a focused modal with its own back and text-size controls.
 
-Original home material remains under “Tentang pelayanan · Heart, Skill, Unity”. Public catalog/content and private data schemas remain unchanged. See [v0.4 review evidence](docs/review/v04/README.md) for screenshots, browser checks and device limitations.
+Home now keeps only the greeting, concise search, devotional entry, shortcuts and featured songs. Complete devotional and legacy philosophy text remains in Fondasi Rohani; module descriptions are under Lainnya, and reference statistics are in Pengaturan. Lessons open on demand. In Lagu, the filter icon opens advanced controls; search, filters and latest per-route scroll positions survive in-app navigation for the current document session. They do not add fields to private backups.
+
+Public catalog/content and private data schemas remain unchanged. See [v0.4.1 review evidence](docs/review/v041/README.md) for screenshots, browser checks and device limitations.
 
 ## Verification
 ```sh

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.1 — 2026-11-15
+- Simplified Beranda to the greeting, concise search, a quiet Holy Fire devotional tile, compact icon shortcuts and song rows. Moved legacy overview material into reading, module information and settings views.
+- Renamed the library to Lagu, removed introductory copy and per-category counts, and moved advanced filters, add/refresh/restore actions and technical notes into an accessible secondary sheet.
+- Preserved search/category/type/status filters and latest per-route scroll positions during the document session. In-app Back uses the matching history entry; repeated route taps no longer scroll or redraw.
+- Consolidated delegated actions and de-duplicated history events. Unchanged profiles and library lists retain their DOM; typing in search no longer rebuilds homepage rows.
+- Added 200ms opacity/transform route transitions and lightweight press feedback with reduced-motion support; the bottom shell remains stationary.
+- Made lessons expandable and moved preparation guides, storage explanations and required notices into secondary reading/disclosure views without removing educational content.
+- Updated app/UI/service-worker cache to 0.4.1. Public songs, content version, storage keys, schema and backup/migration behavior are unchanged.
+- Added fluidity/browser regression checks and before/after evidence in docs/review/v041/README.md.
+
 ## 0.4.0 — 2026-11-15
 - Rebuilt the application shell around five persistent bottom tabs: Beranda, Lagu, Ibadah, Belajar and Lainnya, following the owner-supplied Experience Preview.
 - Introduced Canvas / Ink tokens, compact typography, local SVG icons, plain reading layouts and list-based song browsing. Original educational text and every existing module remain available.
