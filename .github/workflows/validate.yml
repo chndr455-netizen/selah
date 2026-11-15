@@ -15,4 +15,6 @@ jobs:
       - run: node tests/validate.mjs
       - run: node tests/catalog-merge.mjs
       - run: node --check assets/app.js
+      - run: node --check assets/icons.js
+      - run: node --check assets/content.js
       - run: node --check sw.js

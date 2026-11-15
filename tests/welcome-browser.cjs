@@ -45,6 +45,7 @@ const output = path.join(__dirname, '../docs/review/welcome');
         await page.keyboard.press('Enter');
         assert(await page.locator('#welcome').isHidden());
         assert.equal(await page.locator('#appShell').evaluate(el => el.inert), false);
+        await page.locator('.top [data-go="settings"]').click();
         await page.locator('#showWelcome').click();
         await page.emulateMedia({ reducedMotion: 'no-preference' });
         assert.equal(await page.locator('#welcome').evaluate(el => getComputedStyle(el, '::before').animationName), 'welcome-light');
@@ -70,7 +71,7 @@ const output = path.join(__dirname, '../docs/review/welcome');
         await page.locator('[data-page="academy"]').click();
         assert(await page.locator('[data-lesson="0"]').isChecked());
         await page.locator('[data-page="library"]').click();
-        assert.equal(await page.locator('.song').count(), 38);
+        assert.equal(await page.locator('#songGrid .song').count(), 38);
         assert.deepEqual(errors, []);
         console.log(`PASS ${width}x${height}: fit, welcome, focus, motion, enlarged text, navigation, local data and offline reload`);
       } finally { await context.close(); }
