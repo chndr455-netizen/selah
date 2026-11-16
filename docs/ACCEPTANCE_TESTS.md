@@ -1,5 +1,7 @@
 # Acceptance tests — first deployment
 
+Update v0.5.2: check Worship/Praise/Bebas filters, category groups, search and keyboard/touch song picking. Confirm/cancel incompatible type changes and legacy replacements; opening an old plan must never clear its songs. Verify editor cancellation, overrides, offline and backup round-trip with Bebas. See `tests/service-song-picker-browser.cjs` and [v0.5.2 evidence](review/v052/README.md).
+
 Update v0.5.0: the planner is now flexible. Use the six-song Sunday starter and also test custom templates/segments, unrestricted song choices, per-service overrides, multiple saved setlists, touch/keyboard reorder and schema-1 migration. See [v0.5 evidence](review/v050/README.md) and `tests/service-builder-browser.cjs`. The older six-slot checks below remain useful as legacy migration cases.
 
 Update 2026-11-15: Chromium subpath, local data, migration, offline and app-update checks now passed; see [audit results](AUDIT_2026-11-15.md). Live Pages and physical Android/iOS installation remain pending. The packaging note below records the earlier ZIP environment only.

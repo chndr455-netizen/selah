@@ -1,5 +1,5 @@
 import { SLOTS } from './content.js';
-export const SEGMENT_TYPES = {worship:'Worship',praise:'Praise',medley:'Medley',instrumental:'Instrumental',prayer:'Doa',word:'Firman Tuhan',communion:'Perjamuan Kudus',custom:'Custom'};
+export const SEGMENT_TYPES = {worship:'Worship',praise:'Praise',free:'Bebas',medley:'Medley',instrumental:'Instrumental',prayer:'Doa',word:'Firman Tuhan',communion:'Perjamuan Kudus',custom:'Custom'};
 // Starters are local, editable suggestions. Non-musical segments are never required.
 export const STARTERS = [
  {id:'starter-sunday',name:'Ibadah Minggu',segments:SLOTS.map(s=>({name:s.n,type:s.t==='W'?'worship':'praise',recommendation:{category:s.c,type:s.t}}))},

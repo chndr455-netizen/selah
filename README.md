@@ -1,4 +1,4 @@
-# SELAH v0.5.1 — Song Content Submission / PWA
+# SELAH v0.5.2 — Service Song Picker / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -33,13 +33,13 @@ Five persistent bottom tabs organize the existing modules: Beranda; Lagu (catalo
 
 Home now keeps only the greeting, concise search, devotional entry, shortcuts and featured songs. Complete devotional and legacy philosophy text remains in Fondasi Rohani; module descriptions are under Lainnya, and reference statistics are in Pengaturan. Lessons open on demand. In Lagu, the filter icon opens advanced controls; search, filters and latest per-route scroll positions survive in-app navigation for the current document session. They do not add fields to private backups.
 
-The Service Builder keeps the six-song Ibadah Minggu starter, with editable Praise & Worship Night, Ibadah Khusus and Custom / Blank starters. Add any segment or song; categories/W/P are recommendations. Segments support multiple songs (including medleys), service-only key/flow/arrangement overrides, grip dragging, Alt+Up/Down and editor Up/Down controls. Non-musical segments are optional.
+The Service Builder keeps the six-song Ibadah Minggu starter, with editable Praise & Worship Night, Ibadah Khusus and Custom / Blank starters. Add any segment or song. Worship/Praise show matching musical types; Bebas shows both. Categories group matches into Disarankan and Lagu lainnya without restricting selection. Other segment types retain both musical types. The song picker searches titles, artists and keys. Type changes ask before clearing incompatible selections in the editor; cancellation preserves them. Opening old plans never clears mismatched or missing songs. Segments support multiple songs (including medleys), service-only key/flow/arrangement overrides, grip dragging, Alt+Up/Down and editor Up/Down controls. Non-musical segments are optional.
 
 Confirmed edits save locally to the active setlist and its saved-library record. Selecting a template creates a new setlist, preserving the previous one. Template edits affect future copies, not existing setlists. Templates capture segments/song assignments/overrides and briefing; date, WL and theme belong to each service. Use the menu to load, duplicate or delete setlists/templates; use Bagikan & ekspor for clipboard, native sharing (clipboard/TXT fallback), TXT, standalone JSON and print. Standalone setlist JSON imports as a new independent copy.
 
 Storage stays under `selah.v03.state`; v0.2/v0.4 schema-1 backups and `musicMinistry.v1` migrate to schema 2. All six legacy slot notes, selected song IDs (even outside old recommendations or missing from the library), metadata, library overlays, progress, checklist and reflections are retained. New full backups include every saved setlist and template and require v0.5+ to restore. The active `set` is also synchronized into `setlists`; `templates` are separate snapshots. Do not open new backups in an older app expecting schema 1. A failed storage write leaves the last saved data intact; export a recovery backup before closing.
 
-The v0.5.1 submission feature leaves the published catalog and its content version unchanged. See [v0.5 review evidence](docs/review/v050/README.md) for screenshots, test results and device limitations.
+The v0.5.2 picker leaves the published catalog and its content version unchanged. Segments saved with the new Bebas (`free`) type require v0.5.2+ to reopen; old schema-1/schema-2 plans retain their IDs and selections. See [v0.5 review evidence](docs/review/v050/README.md) for screenshots, test results and device limitations.
 
 ## Verification
 ```sh
@@ -47,6 +47,7 @@ node tests/validate.mjs
 node tests/catalog-merge.mjs
 node tests/service-model.mjs
 node tests/song-submission.mjs
+node tests/service-song-picker.mjs
 node --check assets/song-submission.js
 node --check assets/app.js
 node --check sw.js

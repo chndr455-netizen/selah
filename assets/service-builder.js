@@ -1,9 +1,10 @@
 import { SEGMENT_TYPES } from './service-templates.js';
+import { songTypeForSegment, songMatchesSegment, groupServiceSongs, incompatibleEntries } from './service-song-picker.js';
 import { copy, segment, songEntry, cloneSegment, makeService, makeTemplate, syncActiveSet, moveSegment, resolvedEntry, formatService, validateService } from './service-model.js';
 
 export function createServiceBuilder({getState,save,storageReady,notify,download,esc,icon}){
- const $=id=>document.getElementById(id),dialogs=['serviceLibrary','setMetaDialog','segmentDialog','setActions'];
- let templateId=null,draft=null,isNew=false,metaAction='',libraryTab='lists',lastState=null,drag=null,dragFrame=0,suppressClickUntil=0;
+ const $=id=>document.getElementById(id),dialogs=['serviceSongPicker','serviceLibrary','setMetaDialog','segmentDialog','setActions'];
+ let templateId=null,draft=null,isNew=false,metaAction='',libraryTab='lists',lastState=null,drag=null,dragFrame=0,suppressClickUntil=0,pickerEntryId=null;
  const state=()=>getState(),plan=()=>templateId?state().templates.find(t=>t.id===templateId):state().set;
  function feedback(text){if(!storageReady())text='Belum tersimpan. Ekspor cadangan sebelum menutup.';$('serviceStatus').textContent=text;const dialog=dialogs.map($).find(d=>d.open);if(dialog)dialog.querySelector('.sheet-feedback').textContent=text;else notify(text)}
  function closeDialogs(){dialogs.forEach(id=>{if($(id).open)$(id).close()})}
@@ -11,8 +12,9 @@ export function createServiceBuilder({getState,save,storageReady,notify,download
  function persist(){const ok=save();$('serviceStatus').textContent=ok?'Tersimpan':'Belum tersimpan — ekspor cadangan.';return ok}
  function render(){
   if(drag)finishDrag(true,false);
-  if(lastState!==state()){templateId=null;lastState=state()}
+  if(lastState!==state()){if(lastState){closeDialogs();draft=null}templateId=null;lastState=state()}
   if(templateId&&!state().templates.some(t=>t.id===templateId))templateId=null;
+  if($('serviceSongPicker').open)renderSongPicker();
   const current=plan();$('templateMode').hidden=!templateId;$('serviceName').textContent=current.name;
   $('serviceMeta').textContent=templateId?'Template lokal': [current.date,current.wl,current.theme].filter(Boolean).join(' · ')||'Detail ibadah';
   $('setSummary').textContent=`${current.segments.length} segmen · ${current.segments.reduce((n,s)=>n+s.songs.filter(e=>e.songId).length,0)} lagu`;
@@ -37,22 +39,51 @@ export function createServiceBuilder({getState,save,storageReady,notify,download
  function renderEntries(){
   const opened=new Set([...$('segmentSongs').querySelectorAll('.entry-overrides[open]')].map(el=>el.closest('[data-entry]').dataset.entry));
   const active=document.activeElement,focus=active?.dataset.entryField?{id:active.closest('[data-entry]').dataset.entry,field:active.dataset.entryField}:null;
-  const songs=[...state().songs].sort((a,b)=>a.title.localeCompare(b.title,'id'));
   $('segmentSongs').innerHTML=draft.songs.map((entry,i)=>{
-   const selected=state().songs.find(s=>s.id===entry.songId),r=draft.recommendation;
-   return `<div class="segment-song" data-entry="${esc(entry.id)}"><div class="entry-heading"><label for="entry-song-${i}">Lagu ${i+1}</label><button type="button" class="iconbtn" data-builder="remove-song" data-id="${esc(entry.id)}" aria-label="Hapus lagu ${i+1}">×</button></div><select id="entry-song-${i}" data-entry-field="songId"><option value="">Pilih lagu...</option>${entry.songId&&!selected?`<option value="${esc(entry.songId)}" selected>${esc(entry.title||entry.songId)} · tidak di pustaka</option>`:''}${songs.map(s=>`<option value="${esc(s.id)}" ${s.id===entry.songId?'selected':''}>${esc(s.title)}${r.category&&s.cats.includes(r.category)&&(!r.type||s.type===r.type)?' · saran':''}</option>`).join('')}</select><details class="entry-overrides" ${opened.has(entry.id)?'open':''}><summary>Nada dasar, flow & aransemen</summary><div class="field"><label for="entry-key-${i}">Nada dasar ibadah</label><input id="entry-key-${i}" data-entry-field="key" value="${esc(entry.key)}" placeholder="${esc(selected?.key||'Ikuti profil lagu')}" maxlength="30"></div><div class="field"><label for="entry-flow-${i}">Song flow</label><input id="entry-flow-${i}" data-entry-field="flow" value="${esc(entry.flow)}" placeholder="${esc(selected?.form||'Ikuti profil lagu')}" maxlength="1000"></div><div class="field"><label for="entry-notes-${i}">Aransemen ibadah</label><textarea id="entry-notes-${i}" data-entry-field="notes" maxlength="5000" placeholder="${esc(selected?.notes||'Ikuti profil lagu')}">${esc(entry.notes)}</textarea></div><small>Perubahan hanya untuk ibadah ini. Kosong = profil lagu.</small></details></div>`;
+   const selected=state().songs.find(s=>s.id===entry.songId),incompatible=!songMatchesSegment(selected,draft.type);
+   return `<div class="segment-song" data-entry="${esc(entry.id)}"><div class="entry-heading"><label id="entry-label-${i}" for="entry-song-${i}">Lagu ${i+1}</label><button type="button" class="iconbtn" data-builder="remove-song" data-id="${esc(entry.id)}" aria-label="Hapus lagu ${i+1}">×</button></div><button type="button" id="entry-song-${i}" class="entry-song-picker" data-song-id="${esc(entry.songId)}" data-builder="pick-song" data-id="${esc(entry.id)}" aria-haspopup="dialog" aria-controls="serviceSongPicker" aria-labelledby="entry-label-${i} entry-title-${i}"><span id="entry-title-${i}">${esc(selected?.title||entry.title||entry.songId||'Pilih lagu...')}${entry.songId&&!selected?' · tidak di pustaka':''}</span>${icon('chevron')}</button>${incompatible?'<p class="note entry-type-warning" role="status">Pilihan lama berbeda jenis. Gunakan Bebas atau pilih lagu lain.</p>':''}<details class="entry-overrides" ${opened.has(entry.id)?'open':''}><summary>Nada dasar, flow & aransemen</summary><div class="field"><label for="entry-key-${i}">Nada dasar ibadah</label><input id="entry-key-${i}" data-entry-field="key" value="${esc(entry.key)}" placeholder="${esc(selected?.key||'Ikuti profil lagu')}" maxlength="30"></div><div class="field"><label for="entry-flow-${i}">Song flow</label><input id="entry-flow-${i}" data-entry-field="flow" value="${esc(entry.flow)}" placeholder="${esc(selected?.form||'Ikuti profil lagu')}" maxlength="1000"></div><div class="field"><label for="entry-notes-${i}">Aransemen ibadah</label><textarea id="entry-notes-${i}" data-entry-field="notes" maxlength="5000" placeholder="${esc(selected?.notes||'Ikuti profil lagu')}">${esc(entry.notes)}</textarea></div><small>Perubahan hanya untuk ibadah ini. Kosong = profil lagu.</small></details></div>`;
   }).join('');
   if(focus)[...$('segmentSongs').querySelectorAll('[data-entry]')].find(el=>el.dataset.entry===focus.id)?.querySelector(`[data-entry-field="${focus.field}"]`)?.focus({preventScroll:true});
  }
+ function pickerEntry(){return draft?.songs.find(entry=>entry.id===pickerEntryId)}
+ function renderSongPicker(){
+  const entry=pickerEntry();if(!entry){$('serviceSongPicker').close();return}
+  const groups=groupServiceSongs(state().songs,{type:draft.type,category:draft.recommendation.category,query:$('serviceSongSearch').value});
+  $('serviceSongType').textContent=songTypeForSegment(draft.type)?SEGMENT_TYPES[draft.type]:'Bebas';
+  $('serviceSongNotice').textContent=!songMatchesSegment(state().songs.find(song=>song.id===entry.songId),draft.type)?'Pilihan saat ini berbeda jenis. Pilihan tetap ada sampai Anda menggantinya.':'';
+  $('serviceSongCount').textContent=`${groups.recommended.length+groups.others.length} lagu`;
+  $('serviceSongResults').innerHTML=[['recommended','Disarankan',groups.recommended],['others','Lagu lainnya',groups.others]].filter(([, ,songs])=>songs.length).map(([id,title,songs])=>`<section aria-labelledby="picker-${id}"><h3 id="picker-${id}">${title}</h3>${songs.map(song=>`<button type="button" class="menu-row picker-song" data-builder="choose-song" data-id="${esc(song.id)}" aria-pressed="${song.id===entry.songId}"><span class="rowtext"><strong>${esc(song.title)}</strong><small>${esc([song.artist,song.key,song.type==='W'?'Worship':'Praise'].filter(Boolean).join(' · '))}</small></span><span aria-hidden="true">${song.id===entry.songId?'✓':icon('chevron')}</span></button>`).join('')}</section>`).join('')||'<p class="empty">Tidak ada lagu yang cocok.</p>';
+ }
+ function showSongPicker(id){
+  pickerEntryId=id;$('serviceSongSearch').value='';renderSongPicker();$('serviceSongPicker').showModal();$('serviceSongSearch').focus();
+ }
+ function chooseSong(id){
+  const entry=pickerEntry(),song=state().songs.find(song=>song.id===id);if(!entry||!song)return;
+  if(!songMatchesSegment(song,draft.type)){renderSongPicker();return}
+  const previous=state().songs.find(song=>song.id===entry.songId);
+  if(previous&&!songMatchesSegment(previous,draft.type)&&entry.songId!==id&&!confirm(`Pilihan lama “${previous.title}” berbeda jenis. Ganti dengan “${song.title}”?`))return;
+  entry.songId=song.id;entry.title=song.title;$('serviceSongPicker').close();
+ }
+ $('serviceSongSearch').addEventListener('input',()=>{renderSongPicker();$('serviceSongResults').scrollTop=0});
+ $('serviceSongSearch').addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();$('serviceSongResults').querySelector('button')?.focus()}});
+ $('serviceSongResults').addEventListener('keydown',event=>{
+  if(!['ArrowDown','ArrowUp','Home','End'].includes(event.key))return;
+  const buttons=[...$('serviceSongResults').querySelectorAll('button')],index=buttons.indexOf(event.target);if(index<0)return;
+  event.preventDefault();const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:Math.max(0,Math.min(buttons.length-1,index+(event.key==='ArrowDown'?1:-1)));buttons[next]?.focus();
+ });
+ $('serviceSongPicker').addEventListener('close',()=>{
+  const id=pickerEntryId;pickerEntryId=null;if(!$('segmentDialog').open||!draft)return;
+  renderEntries();[...$('segmentSongs').querySelectorAll('[data-builder="pick-song"]')].find(button=>button.dataset.id===id)?.focus({preventScroll:true});
+ });
  function editSegment(id){
   const found=plan().segments.find(s=>s.id===id);draft=found?copy(found):segment();isNew=!found;
-  if(!draft.songs.length&&['worship','praise','medley','instrumental'].includes(draft.type))draft.songs.push(songEntry());
+  if(!draft.songs.length&&['worship','praise','free','medley','instrumental'].includes(draft.type))draft.songs.push(songEntry());
   $('segmentDialogTitle').textContent=isNew?'Tambah segmen':'Edit segmen';$('segmentName').value=draft.name;$('segmentType').value=draft.type;$('segmentNotes').value=draft.notes;$('segmentCategory').value=draft.recommendation.category;
   for(const action of ['move-up','move-down','delete-segment'])document.querySelector(`[data-builder="${action}"]`).hidden=isNew;
   const index=plan().segments.findIndex(s=>s.id===id);document.querySelector('[data-builder="move-up"]').disabled=index<=0;document.querySelector('[data-builder="move-down"]').disabled=index===plan().segments.length-1;
   renderEntries();open('segmentDialog');
  }
- function readDraft(){if(!$('segmentForm').reportValidity())return false;draft.name=$('segmentName').value.trim();if(!draft.name)return false;draft.type=$('segmentType').value;draft.notes=$('segmentNotes').value;draft.recommendation.category=$('segmentCategory').value;draft.recommendation.type=draft.type==='worship'?'W':draft.type==='praise'?'P':'';return true}
+ function readDraft(){if(!$('segmentForm').reportValidity())return false;draft.name=$('segmentName').value.trim();if(!draft.name)return false;draft.type=$('segmentType').value;draft.notes=$('segmentNotes').value;draft.recommendation.category=$('segmentCategory').value;draft.recommendation.type=songTypeForSegment(draft.type);return true}
  function commitSegment(action='save'){
   if(!readDraft())return;const p=plan(),index=p.segments.findIndex(s=>s.id===draft.id);if(index<0)p.segments.push(copy(draft));else p.segments[index]=copy(draft);
   let focus=draft.id;
@@ -74,6 +105,8 @@ export function createServiceBuilder({getState,save,storageReady,notify,download
   if(name==='use-template'){syncActiveSet(state());state().set=makeService(state().templates.find(t=>t.id===id));templateId=null;persist();closeDialogs();render();return}
   if(name==='edit-template'){templateId=id;closeDialogs();render();return}
   if(name==='duplicate-template'){const t=state().templates.find(t=>t.id===id),duplicate=makeTemplate(t,'Salinan '+t.name);state().templates.push(duplicate);templateId=duplicate.id;persist();closeDialogs();render();return}
+  if(name==='pick-song'){showSongPicker(id);return}
+  if(name==='choose-song'){chooseSong(id);return}
   if(name==='add-song'){draft.songs.push(songEntry());renderEntries();return}
   if(name==='remove-song'){draft.songs=draft.songs.filter(e=>e.id!==id);renderEntries();return}
   if(name==='move-up'||name==='move-down'||name==='duplicate-segment'){commitSegment(name==='move-up'?'up':name==='move-down'?'down':'duplicate');return}
@@ -95,9 +128,18 @@ export function createServiceBuilder({getState,save,storageReady,notify,download
  $('openSetActions').onclick=()=>{$('setActionsTitle').textContent=templateId?'Template':'Setlist';document.querySelector('[data-builder="delete-plan"]').textContent=templateId?'Hapus template':'Hapus setlist';open('setActions')};
  $('setMetaForm').onsubmit=e=>{e.preventDefault();const name=$('setName').value.trim();if(!name)return;const p=plan();if(metaAction==='save-template'){state().templates.push(makeTemplate({...p,notes:$('setNotes').value},name))}else{p.name=name;p.notes=$('setNotes').value;if(!templateId)for(const[id,key]of [['setDate','date'],['setWL','wl'],['setTheme','theme']])p[key]=$(id).value}persist();closeDialogs();render();feedback(metaAction==='save-template'?'Template disimpan.':'Tersimpan.')};
  $('segmentForm').onsubmit=e=>{e.preventDefault();commitSegment()};
- $('segmentType').onchange=()=>{const previous=SEGMENT_TYPES[draft.type];draft.type=$('segmentType').value;if($('segmentName').value===previous)$('segmentName').value=SEGMENT_TYPES[draft.type];if(['prayer','word','communion','custom'].includes(draft.type))draft.songs=draft.songs.filter(e=>e.songId||e.key||e.flow||e.notes||e.title);else if(!draft.songs.length)draft.songs.push(songEntry());renderEntries()};
- $('segmentSongs').addEventListener('input',e=>{const field=e.target.dataset.entryField;if(!field)return;const entry=draft.songs.find(item=>item.id===e.target.closest('[data-entry]').dataset.entry);entry[field]=e.target.value;if(field==='songId')entry.title=state().songs.find(s=>s.id===entry.songId)?.title||''});
- $('segmentSongs').addEventListener('change',e=>{if(e.target.dataset.entryField==='songId'){const entry=draft.songs.find(item=>item.id===e.target.closest('[data-entry]').dataset.entry);entry.songId=e.target.value;entry.title=state().songs.find(s=>s.id===entry.songId)?.title||'';renderEntries()}});
+ $('segmentType').onchange=()=>{
+  const next=$('segmentType').value,previous=draft.type,incompatible=incompatibleEntries(draft.songs,state().songs,next);
+  if(incompatible.length&&!confirm(`${incompatible.length} pilihan lagu tidak sesuai jenis ${SEGMENT_TYPES[next]}. Lanjutkan dan kosongkan pilihan tersebut di editor? Nada dasar, flow dan catatan tetap ada. Batal untuk mempertahankan pilihan.`)){$('segmentType').value=previous;return}
+  for(const entry of incompatible){entry.songId='';entry.title=''}
+  draft.type=next;draft.recommendation.type=songTypeForSegment(next);
+  if($('segmentName').value===SEGMENT_TYPES[previous])$('segmentName').value=SEGMENT_TYPES[next];
+  if(['prayer','word','communion','custom'].includes(next))draft.songs=draft.songs.filter(entry=>entry.songId||entry.key||entry.flow||entry.notes||entry.title);else if(!draft.songs.length)draft.songs.push(songEntry());
+  renderEntries();if($('serviceSongPicker').open)renderSongPicker();
+  $('segmentDialog').querySelector('.sheet-feedback').textContent=incompatible.length?'Pilihan dikosongkan di editor. Simpan segmen untuk menerapkan.':'';
+ };
+ $('segmentCategory').onchange=()=>{draft.recommendation.category=$('segmentCategory').value;if($('serviceSongPicker').open)renderSongPicker()};
+ $('segmentSongs').addEventListener('input',event=>{const field=event.target.dataset.entryField;if(!['key','flow','notes'].includes(field))return;const entry=draft.songs.find(item=>item.id===event.target.closest('[data-entry]').dataset.entry);entry[field]=event.target.value});
  $('importSetFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const raw=JSON.parse(await file.text());if(raw.format!=='selah-service'||raw.version!==1)throw Error('format');const imported=validateService(raw.set),next=makeService(imported);Object.assign(next,{date:imported.date,wl:imported.wl,theme:imported.theme,notes:imported.notes});if(confirm(`Impor ${imported.name} sebagai setlist baru?`)){syncActiveSet(state());state().set=next;templateId=null;persist();closeDialogs();render();feedback('Setlist diimpor.')}}catch{feedback('Impor setlist gagal: format tidak valid.')}finally{e.target.value=''}};
  [$('setlist'),...dialogs.map($)].forEach(root=>root.addEventListener('click',action));
  // Pointer-based sorting works with touch, mouse and pen. Only the grip suppresses scrolling.

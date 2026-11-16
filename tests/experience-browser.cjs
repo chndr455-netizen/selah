@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/';
-const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v051');
+const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v052/regression');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  try{
@@ -47,7 +47,7 @@ const output=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/revi
     await p.reload();await enter();assert.equal(await p.evaluate(()=>location.hash),songRoute);assert.match(await p.locator('#profileBody').innerText(),/Teks uji asli/);
     await p.locator('#closeProfile').click();await p.waitForSelector('#library.active');await p.goForward();await p.waitForSelector('#profile.active');await p.goBack();await p.waitForSelector('#library.active');
     await p.locator('#openLibraryOptions').click();await p.locator('#addSong').click();await p.locator('#fTitle').fill('Lagu uji lokal');await p.locator('#fCats input[value="O"]').check();await p.locator('#songForm button[type="submit"]').click();assert.match(await p.locator('#resultCount').innerText(),/39/);await p.locator('#search').fill('Lagu uji lokal');await p.locator('#songGrid [data-profile]').click();await p.locator('#editProfile').click();await p.locator('#deleteSong').click();await p.waitForSelector('#library.active');await p.locator('#search').fill('');assert.equal(await p.locator('#songGrid .song').count(),38);
-    await tab('setlist');for(let i=0;i<6;i++){await p.locator('.segment-summary').nth(i).click();await p.locator('[data-entry-field="songId"]').selectOption('s001');if(i===0)await p.locator('#segmentNotes').fill('Cue uji');await p.locator('#segmentForm button[type="submit"]').click()}
+    await tab('setlist');for(let i=0;i<6;i++){await p.locator('.segment-summary').nth(i).click();await p.locator('#segmentType').selectOption('free');await p.locator('[data-builder="pick-song"]').click();await p.locator('[data-builder="choose-song"][data-id="s001"]').click();await p.waitForFunction(()=>document.querySelector('[data-builder="pick-song"]')?.dataset.songId==='s001');if(i===0)await p.locator('#segmentNotes').fill('Cue uji');await p.locator('#segmentForm button[type="submit"]').click()}
     await p.locator('#editSetMeta').click();await p.locator('#setWL').fill('Uji WL');await p.locator('#setMetaForm button[type="submit"]').click();assert.match(await p.locator('#setSummary').innerText(),/6 segmen · 6 lagu/);
     await p.locator('#openSetActions').click();await p.locator('#copySet').click();assert.match(await p.evaluate(()=>navigator.clipboard.readText()),/Uji WL/);
     let pending=p.waitForEvent('download');await p.locator('#downloadSet').click();assert.match(fs.readFileSync(await(await pending).path(),'utf8'),/Cue uji/);

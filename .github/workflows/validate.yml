@@ -16,11 +16,13 @@ jobs:
       - run: node tests/catalog-merge.mjs
       - run: node tests/service-model.mjs
       - run: node tests/song-submission.mjs
+      - run: node tests/service-song-picker.mjs
       - run: node --check assets/app.js
       - run: node --check assets/icons.js
       - run: node --check assets/content.js
       - run: node --check assets/service-model.js
       - run: node --check assets/service-templates.js
       - run: node --check assets/service-builder.js
+      - run: node --check assets/service-song-picker.js
       - run: node --check assets/song-submission.js
       - run: node --check sw.js
