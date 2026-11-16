@@ -422,3 +422,9 @@ button:active{transform:scale(.97);opacity:.82}
 .picker-song[aria-pressed=true]{color:var(--red)}
 .picker-song>span:last-child{flex-shrink:0}
 @media(min-width:700px){.song-picker{inset:0;margin:auto;height:min(680px,85vh);height:min(680px,85dvh);border-radius:20px}}
+
+.song-sync-review{margin:12px 0;font-size:13px}
+.song-sync-review summary{min-height:44px;padding:10px 0;color:var(--red)}
+.song-sync-review section{padding:12px 0;border-bottom:1px solid var(--line)}
+.song-sync-review h3{font-size:14px}
+.song-sync-review pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;margin:4px 0 12px}
