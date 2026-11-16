@@ -1,0 +1,14 @@
+{
+  "name": "selah-content-checks",
+  "private": true,
+  "scripts": {
+    "test:content": "node tests/cms-content.mjs",
+    "test:cms-upstream": "node tests/pages-cms-upstream.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "yaml": "2.9.1",
+    "zod": "3.25.76"
+  },
+  "type": "module"
+}

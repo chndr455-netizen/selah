@@ -1,0 +1,61 @@
+name: Prepare lyric permission review
+on:
+  workflow_dispatch:
+    inputs:
+      song_id:
+        description: Stable song ID in the editorial draft
+        required: true
+        type: string
+      basis:
+        description: Public summary of the authorization already reviewed (no private documents)
+        required: true
+        type: string
+      permission_verified:
+        description: I have reviewed permission for these exact lyrics and rights text
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare an approval-only PR (never publish lyrics)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SONG_ID: ${{ inputs.song_id }}
+          PUBLIC_BASIS: ${{ inputs.basis }}
+          CONFIRMED: ${{ inputs.permission_verified }}
+        run: |
+          if [ "$CONFIRMED" != 'true' ]; then
+            echo 'Permission must be reviewed before recording a decision.' >&2
+            exit 1
+          fi
+          git fetch origin refs/heads/cms/editorial:refs/remotes/origin/cms/editorial
+          git show origin/cms/editorial:data/songs.json > "$RUNNER_TEMP/selah-authorized-draft.json"
+          node scripts/approve-lyrics.mjs --song "$SONG_ID" --by "$GITHUB_ACTOR" --basis "$PUBLIC_BASIS" --catalog "$RUNNER_TEMP/selah-authorized-draft.json"
+          node scripts/check-content.mjs
+          branch="cms/permission-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/lyrics-permissions.json
+          git commit -m 'content: prepare owner-reviewed lyric permission record'
+          git push origin "$branch"
+          cat > "$RUNNER_TEMP/selah-permission-pr.md" <<'BODY'
+          This approval-only PR records a permission review explicitly confirmed by the workflow actor. It hashes the exact saved editorial lyrics and rights text. It does not publish lyrics or verify a legal claim automatically.
+
+          Owner: review the record and actual authorization before approving/merging. The separate CMS publication job can use it only after it exists on main. No content/app version changes are included.
+          BODY
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title 'Content: review lyric publication permission' --body-file "$RUNNER_TEMP/selah-permission-pr.md"
+          gh workflow run validate.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"

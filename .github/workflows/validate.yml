@@ -1,7 +1,9 @@
 name: Validate SELAH
 on:
   push:
+    branches-ignore: [cms/editorial]
   pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -12,6 +14,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: npm ci
+      - run: node tests/cms-content.mjs
+      - run: node tests/cms-editorial.mjs
+      - uses: actions/checkout@v4
+        with:
+          repository: pagescms/pagescms
+          ref: 6f4e860a35d934406580287e7042e5e111e207a1
+          path: .cms-upstream
+          persist-credentials: false
+      - run: node tests/pages-cms-upstream.mjs
+        env:
+          SELAH_PAGES_CMS_SOURCE: ${{ github.workspace }}/.cms-upstream
+      - name: Check published content policy
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git fetch origin refs/heads/main:refs/remotes/origin/main
+          if [ -n "$BASE_SHA" ]; then
+            git fetch origin "$BASE_SHA"
+            node scripts/check-content.mjs --base "$BASE_SHA"
+          else
+            node scripts/check-content.mjs --base origin/main
+          fi
       - run: node tests/validate.mjs
       - run: node tests/catalog-merge.mjs
       - run: node tests/service-model.mjs

@@ -1,0 +1,62 @@
+name: Prepare CMS publication
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS context (ignored; branch and validation are fixed)
+        type: string
+        required: false
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+concurrency:
+  group: cms-publication
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Read editorial snapshot using trusted main scripts
+        run: |
+          git fetch origin refs/heads/cms/editorial:refs/remotes/origin/cms/editorial
+          node scripts/prepare-content.mjs --editorial origin/cms/editorial --output "$RUNNER_TEMP/selah-publication"
+        id: prepare
+      - name: Validate publication and create review PR
+        if: steps.prepare.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EDITORIAL_SHA: ${{ steps.prepare.outputs.editorial_sha }}
+        run: |
+          cp "$RUNNER_TEMP/selah-publication/data/"*.json data/
+          SELAH_CONTENT_ONLY=true node scripts/check-content.mjs --base origin/main
+          node tests/validate.mjs
+          node tests/catalog-merge.mjs
+          node tests/song-submission.mjs
+          branch="cms/publish-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/songs.json data/version.json data/cms-publication.json
+          git commit -m 'content: prepare reviewed CMS publication'
+          git push origin "$branch"
+          cat > "$RUNNER_TEMP/selah-pr.md" <<BODY
+          Prepared from editorial snapshot $EDITORIAL_SHA using trusted main validation.
+
+          Schema, stable IDs, musical keys, verified lyric hashes and three-way conflict checks passed. Only the catalog, content version and editorial checkpoint change. The application version is unchanged.
+
+          Review the song diff and permission evidence before merging. This workflow never merges automatically.
+          BODY
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title 'Content: publish reviewed Song Library edits' --body-file "$RUNNER_TEMP/selah-pr.md"
+          gh workflow run validate.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"
+          echo "Publication PR prepared; merge remains manual." >> "$GITHUB_STEP_SUMMARY"
+      - if: steps.prepare.outputs.changed != 'true'
+        run: echo 'No public content changes. No PR or version bump required.' >> "$GITHUB_STEP_SUMMARY"
