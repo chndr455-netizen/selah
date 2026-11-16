@@ -1,0 +1,29 @@
+name: Validate CMS draft
+on:
+  push:
+    branches: [cms/editorial]
+    paths: [data/songs.json, .pages.yml]
+permissions:
+  contents: read
+concurrency:
+  group: cms-draft
+  cancel-in-progress: true
+jobs:
+  draft:
+    if: github.event.created == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Validate exact saved draft with trusted main code
+        env:
+          EDITORIAL_SHA: ${{ github.sha }}
+        run: |
+          git fetch origin "$EDITORIAL_SHA"
+          node scripts/prepare-content.mjs --editorial "$EDITORIAL_SHA"

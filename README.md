@@ -24,8 +24,14 @@ Buka Lagu → menu filter → Tambah lagu, atau profil lagu → edit. **Simpan L
 
 Kirim berkas `selah-add-judul.json` / `selah-edit-judul.json` atau teks JSON ke ChatGPT/Codex untuk diperiksa sesuai [panduan konten](docs/CONTENT_GUIDE.md). Pengajuan EDIT membandingkan formulir dengan lagu publik, termasuk perubahan lokal yang sudah tersimpan. Lagu buatan lokal diajukan sebagai ADD. Jangan kirim cadangan penuh: pengajuan hanya berisi satu lagu. Baca isinya sebelum membagikan catatan atau teks izin yang Anda masukkan. Ekspor berfungsi offline setelah aplikasi tersimpan di cache; dukungan clipboard bergantung pada browser/izin.
 
+## Pages CMS — Pustaka Lagu
+
+Gunakan Pages CMS di `cms/editorial` untuk menyunting seluruh kolom lagu. Beberapa simpanan dapat digabung dalam satu publikasi. **Siapkan publikasi untuk review** menjalankan validasi dan menyiapkan PR; owner meninjau lalu merge secara manual. Versi konten diperbarui dari hash katalog tanpa rilis aplikasi. Lirik memerlukan catatan izin yang telah ditinjau dan cocok dengan teks persisnya; tidak cukup mengisi kolom izin.
+
+[Petunjuk aktivasi dan penggunaan](docs/cms/README.md). Koneksi GitHub App, perlindungan main dan uji simpan pada hosted CMS harus diselesaikan owner sebelum digunakan untuk publikasi. Aplikasi tetap statis; tidak ada database/backend/autentikasi baru. `npm ci` hanya untuk alat validasi pengembangan, bukan untuk menjalankan PWA.
+
 ## Publishing without editing code
-In Codex, send song information using `docs/CONTENT_GUIDE.md`. The agent should update only song content + content version and validate. Review PR diff, merge, then GitHub Pages publishes. Pages CMS is optional and not configured. App shell caches are versioned; users may need to close all SELAH tabs and reopen after an app update. Song JSON uses network-first with offline fallback. For an app release bump the manifest-related UI version, `data/version.json` and cache name in `sw.js`. No blanket cache clearing or local storage reset on updates.
+In Codex, send song information using `docs/CONTENT_GUIDE.md`. The agent should update only song content + content version and validate. Review PR diff, merge, then GitHub Pages publishes. Hosted Pages CMS Phase I is configured for the `cms/editorial` branch; [setup, review/publication and acceptance instructions](docs/cms/README.md) include required owner activation and branch protections. App shell caches are versioned; users may need to close all SELAH tabs and reopen after an app update. Song JSON uses network-first with offline fallback. For an app release bump the manifest-related UI version, `data/version.json` and cache name in `sw.js`. No blanket cache clearing or local storage reset on updates.
 
 ## Navigation (v0.4)
 

@@ -1,0 +1,9 @@
+# Enable required code-owner review in main's ruleset; this file alone does not enforce it.
+/.pages.yml @chndr455-netizen
+/.github/ @chndr455-netizen
+/scripts/ @chndr455-netizen
+/data/songs.json @chndr455-netizen
+/data/version.json @chndr455-netizen
+/data/cms-publication.json @chndr455-netizen
+/data/lyrics-permissions.json @chndr455-netizen
+/package*.json @chndr455-netizen

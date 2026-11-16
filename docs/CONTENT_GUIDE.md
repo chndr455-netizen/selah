@@ -1,3 +1,9 @@
+# Mengelola lagu melalui Pages CMS
+
+Gunakan [panduan CMS](cms/README.md) untuk aktivasi, penyuntingan, izin lirik dan publikasi. Pilih branch **cms/editorial**, bukan main. Simpan beberapa perubahan, periksa hasil Validasi CMS draft, lalu gunakan **Siapkan publikasi untuk review**. Publikasi tetap melalui PR yang ditinjau owner. Jangan ubah ID lama atau hapus lagu pada Phase I; isi ID baru unik untuk penambahan. BPM tetap teks, kategori tetap array, kolom kosong dipulihkan oleh alat persiapan.
+
+Izin lirik harus ditinjau terlebih dahulu dalam `data/lyrics-permissions.json` (hash teks dan catatan izin). Jangan menaruh lirik tanpa izin atau dokumen rahasia di branch editorial: semua commit repo publik dapat dibaca. Catatan izin CMS atau pengajuan aplikasi tidak otomatis memverifikasi hak publikasi. Lihat prosedur persetujuan pada panduan CMS. Untuk perubahan melalui Codex, gunakan `node scripts/version-content.mjs`; jangan menaikkan versi aplikasi/SW untuk perubahan lagu saja.
+
 # Song Library — Panduan pengiriman konten ke Codex
 
 Copy the following form into a Codex task. Fill only what you know; use “belum diketahui” for uncertain details. For lyrics, include exact owner-approved text and documented publication authorization, or leave blank. Never infer unknown credits or musical values. Categories can overlap. English equivalents: O Opening/Pembukaan, P Praise/Pujian, S Sermon/Sebelum firman, G Giving/Persembahan, C Closing/Penutup. W/P type is separate from the category. For the six-song Ibadah Minggu starter, W suggests O/S/C and P suggests P/G. Service categories are recommendations only. In the Service Builder, Worship/Praise filter matching W/P song types; choose Bebas to select either type. Existing saved choices are preserved.

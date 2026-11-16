@@ -1,0 +1,118 @@
+# Edit ONLY cms/editorial in Pages CMS. main requires a reviewed publication PR.
+# Root-list CMS saves omit empty strings; the publication job restores the schema.
+settings:
+  config: false
+content:
+  - name: songs
+    label: Pustaka Lagu
+    description: 'Draf di cms/editorial. Simpan beberapa perubahan, lalu jalankan Siapkan publikasi. Jangan menyunting main. Lirik memerlukan izin yang telah diverifikasi.'
+    type: file
+    path: data/songs.json
+    format: json
+    list: true
+    operations:
+      create: false
+      rename: false
+      delete: false
+    fields:
+      - name: id
+        label: ID lagu tetap
+        type: string
+        required: true
+        description: 'Jangan ubah ID lagu lama. Lagu baru: s039, s040, dst.; harus unik. CI menolak penghapusan atau penggantian ID lama.'
+        pattern:
+          regex: '^s[0-9]{3,}$'
+          message: 'Gunakan s diikuti minimal tiga angka.'
+      - name: title
+        label: Judul
+        type: string
+        required: true
+        pattern: '\S'
+      - name: artist
+        label: Artis / pencipta
+        type: string
+      - name: key
+        label: Nada dasar
+        type: string
+        description: 'Kosong jika belum diketahui. Contoh: C, F#, Bb, Am, F#m, C/E.'
+        pattern:
+          regex: '^$|^[A-G](?:#|b)?m?(?:/[A-G](?:#|b)?)?$'
+          message: 'Gunakan nada A–G, opsional #/b, m dan bass inversi; atau kosong.'
+      - name: type
+        label: Jenis musikal
+        type: select
+        required: true
+        options:
+          values:
+            - {value: W, label: Worship}
+            - {value: P, label: Praise}
+      - name: cats
+        label: Kategori pelayanan
+        type: select
+        required: true
+        options:
+          multiple: true
+          values:
+            - {value: O, label: Pembukaan}
+            - {value: P, label: Pujian}
+            - {value: S, label: Sebelum firman}
+            - {value: G, label: Persembahan}
+            - {value: C, label: Penutup}
+      - name: lyrics
+        label: Lirik
+        type: text
+        description: 'Teks biasa, bukan Markdown. Kosongkan sampai izin atas teks persis ini disetujui dan tercatat di data/lyrics-permissions.json. Catatan izin saja bukan verifikasi.'
+      - name: form
+        label: Alur lagu
+        type: string
+      - name: bpm
+        label: BPM
+        type: string
+        description: 'Tetap berupa teks, bukan angka JSON. Kosong jika belum diukur.'
+        pattern:
+          regex: '^$|^(?:[2-9][0-9]|[12][0-9]{2}|300)$'
+          message: 'Isi bilangan bulat 20–300 atau kosong.'
+      - name: meter
+        label: Birama
+        type: string
+        pattern: '^$|^[1-9][0-9]*/(?:1|2|4|8|16|32)$'
+      - name: theme
+        label: Tema
+        type: string
+      - name: bible
+        label: Rujukan Alkitab
+        type: string
+      - name: meaning
+        label: Makna / renungan lagu
+        type: text
+      - name: notes
+        label: Catatan aransemen
+        type: text
+      - name: source
+        label: Kode sumber lama
+        type: string
+        description: 'Pertahankan kode yang sudah ada. Lagu baru boleh kosong; gunakan Tautan resmi untuk URL.'
+      - name: url
+        label: Tautan resmi
+        type: string
+        pattern: '^$|^https?://[^\s]+$'
+      - name: rights
+        label: Atribusi / sumber / dasar izin publikasi
+        type: text
+        description: 'Catatan publik saja; jangan masukkan dokumen izin rahasia atau kontak pribadi. Verifikasi owner dicatat terpisah berdasarkan hash teks dan catatan izin.'
+      - name: status
+        label: Status
+        type: select
+        required: true
+        default: Kandidat
+        options:
+          values: [Kandidat, Dalam latihan, Siap]
+    actions:
+      - name: prepare-publication
+        label: Siapkan publikasi untuk review
+        workflow: cms-publish.yml
+        ref: main
+        confirm:
+          title: Siapkan publikasi?
+          message: 'Simpan semua perubahan terlebih dahulu. Alur ini memvalidasi draf terbaru dan membuat PR ke main; tidak melakukan merge.'
+          button: Siapkan PR

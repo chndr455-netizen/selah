@@ -1,5 +1,11 @@
 # Changelog
 
+## Pages CMS Phase I — 2026-11-16
+- Configured the existing top-level song array with all 18 fields and preserved string BPM, category arrays, stable IDs and plain-text lyrics. Added required/key/ID checks and a reviewed lyric-permission hash ledger; no current lyrics or songs were changed.
+- Added editorial draft validation, trusted-main publication preparation and manual review PRs. Normalization restores optional empty strings removed by Pages CMS; schema drift, ID loss, unverified lyrics and conflicting edits block publication.
+- Added deterministic content versions and an editorial checkpoint for multiple batches, concurrent main edits and squash-merge compatibility. Application version 0.5.2, service worker, PWA assets, storage and submission behavior remain unchanged.
+- Documented hosted-app activation, protected-main requirements, owner permission review and outstanding hosted acceptance. Added development-only validation tools and pinned upstream save/schema tests. No CMS server, database or custom authentication was introduced.
+
 ## 0.5.2 — 2026-11-16
 - Replaced the Service Builder song dropdown with a responsive, searchable picker. Matches are grouped into Disarankan and Lagu lainnya by service category, without category restrictions or per-title “saran” suffixes.
 - Worship shows only W songs and Praise only P songs; added Bebas for both. Other segment types retain access to both. Type/category/catalog changes update available choices immediately.
