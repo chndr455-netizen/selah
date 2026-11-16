@@ -36,7 +36,7 @@
     "notes": "Piano atau gitar akustik; pertahankan ruang untuk jemaat.",
     "source": "K",
     "bpm": "",
-    "key": "",
+    "key": "C",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -49,7 +49,7 @@
   {
     "id": "s003",
     "title": "Bagi Tuhan Tak Ada yang Mustahil",
-    "artist": "",
+    "artist": "Sari Simorangkir",
     "type": "W",
     "cats": [
       "O",
@@ -59,7 +59,7 @@
     "notes": "Mulai lembut; atur klimaks sesuai arah WL.",
     "source": "F",
     "bpm": "",
-    "key": "",
+    "key": "C",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -72,7 +72,7 @@
   {
     "id": "s004",
     "title": "Dengan Sayap-Mu",
-    "artist": "",
+    "artist": "Sari Simorangkir",
     "type": "W",
     "cats": [
       "O",
@@ -82,7 +82,7 @@
     "notes": "Intro sederhana; dinamika hangat dan stabil.",
     "source": "F",
     "bpm": "",
-    "key": "",
+    "key": "C",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -195,7 +195,7 @@
     "notes": "Groove tegas; siapkan cue masuk dan ending bersama.",
     "source": "J",
     "bpm": "",
-    "key": "",
+    "key": "G",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -340,7 +340,7 @@
   {
     "id": "s016",
     "title": "Datanglah dan Bertahta",
-    "artist": "",
+    "artist": "NDC Worship",
     "type": "P",
     "cats": [
       "P"
@@ -349,7 +349,7 @@
     "notes": "Siapkan build dan cue akhir.",
     "source": "R",
     "bpm": "",
-    "key": "",
+    "key": "D",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -528,7 +528,7 @@
     "notes": "Piano dan gitar; hindari dinamika mendadak.",
     "source": "R",
     "bpm": "",
-    "key": "",
+    "key": "D",
     "status": "Kandidat",
     "url": "",
     "meter": "",
@@ -563,7 +563,7 @@
   {
     "id": "s026",
     "title": "Allah Itu Baik",
-    "artist": "",
+    "artist": "Welyar Kauntu",
     "type": "P",
     "cats": [
       "P",
@@ -573,7 +573,7 @@
     "notes": "Gunakan versi jemaat yang dikenal; vamp opsional.",
     "source": "L",
     "bpm": "",
-    "key": "",
+    "key": "A",
     "status": "Kandidat",
     "url": "",
     "meter": "",
