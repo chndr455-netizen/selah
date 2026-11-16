@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.2 — 2026-11-16
+- Replaced the Service Builder song dropdown with a responsive, searchable picker. Matches are grouped into Disarankan and Lagu lainnya by service category, without category restrictions or per-title “saran” suffixes.
+- Worship shows only W songs and Praise only P songs; added Bebas for both. Other segment types retain access to both. Type/category/catalog changes update available choices immediately.
+- Confirm before clearing incompatible choices after a type change, or replacing an incompatible old selection. Cancellation leaves the draft unchanged. Clearing affects only song references in the editor; entry IDs and service overrides remain, and closing without saving preserves the saved plan.
+- Existing type/category mismatches, missing references, templates, songs and local data survive loading/importing without automatic clearing. Bebas uses segment type `free` within schema 2; older plans/imports remain supported.
+- Updated app/UI/cache to 0.5.2 and precached the picker rules module. Added selection-rule/browser coverage and updated existing service/application journeys. Public catalog/content version and storage keys are unchanged. See docs/review/v052/README.md.
+
 ## 0.5.1 — 2026-11-15
 - Reused the song editor with primary title/creator/key/type/category/lyrics fields and an Informasi Lanjutan disclosure. Kept Simpan Lokal independent from Ekspor Pengajuan (.json) and Salin Pengajuan.
 - Added offline single-song ADD/EDIT submissions with schema version, timestamp, observed public content version, stable public IDs, original/proposed values and unchanged/modified/cleared field statuses. Local-only songs submit as ADD; omitted fields never imply deletion.

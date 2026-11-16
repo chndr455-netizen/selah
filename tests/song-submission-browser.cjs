@@ -1,5 +1,5 @@
 const{chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
-const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/',out=path.join(__dirname,'../docs/review/v051');
+const url=process.env.SELAH_TEST_URL||'http://127.0.0.1:8765/selah/',out=process.env.SELAH_SCREENSHOT_DIR||path.join(__dirname,'../docs/review/v051');
 fs.mkdirSync(out,{recursive:true});
 const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/songs.json'))),version=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/version.json'))).content;
 const base=catalog.find(s=>s.id==='s001');
