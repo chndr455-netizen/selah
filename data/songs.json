@@ -3,94 +3,69 @@
     "id": "s001",
     "title": "Bejana-Mu",
     "artist": "JPCC Worship",
+    "key": "D",
     "type": "W",
     "cats": [
       "O",
       "S"
     ],
+    "lyrics": "[Verse 1]\nKekuatan di jiwaku\nKetenangan batinku\nAda dalam hadirat-mu\nKu menyembah-mu\n\n[Verse 2]\nTersungkur ku di kaki-mu\nRasakan hadirat-mu\nTak 'kan ku melepaskan-mu\nKau cahaya bagiku\n\n[Chorus]\nMengiring-mu seumur hidupku\nMasuk dalam rencana-mu bapa\nPikiranku, kehendakku, kuserahkan pada-mu\n\nHarapanku hanya di dalam-mu\nKu 'kan teguh bersama-mu tuhan\nJadikanku bejana-mu untuk memuliakan-mu",
     "theme": "Penyerahan, panggilan",
+    "bible": "Yeremia 18:1–6",
     "notes": "Piano dan pad; bangun secara bertahap, akhiri dengan tenang.",
     "source": "J",
-    "bpm": "",
-    "key": "D",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yeremia 18:1–6"
+    "status": "Kandidat"
   },
   {
     "id": "s002",
     "title": "Ku Mau Cinta Yesus Selamanya",
-    "artist": "",
+    "key": "C",
     "type": "W",
     "cats": [
       "O",
       "S",
       "C"
     ],
+    "lyrics": "[Verse]\nKumau cinta Yesus selamanya\nKumau cinta Yesus selamanya\nMeskipun badai silih berganti dalam hidupku\nKu tetap cinta Yesus selamanya\n\n[Chorus]\nYa Bapa Bapa, ini aku anakMu\nLayakkanlah seluruh hidupku\nYa Bapa Bapa, ini aku anakMu\nPakailah sesuai dengan rencanaMu",
     "theme": "Kasih kepada Kristus, komitmen",
+    "bible": "Yohanes 15:9–10",
     "notes": "Piano atau gitar akustik; pertahankan ruang untuk jemaat.",
     "source": "K",
-    "bpm": "",
-    "key": "C",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yohanes 15:9–10"
+    "status": "Kandidat"
   },
   {
     "id": "s003",
     "title": "Bagi Tuhan Tak Ada yang Mustahil",
     "artist": "Sari Simorangkir",
+    "key": "C",
     "type": "W",
     "cats": [
       "O",
       "S"
     ],
+    "lyrics": "[Verse 1]\nKu yakin saat Kau berfirman\nKu menang saat Kau bertindak\nHidupku hanya ditentukan oleh perkataan-Mu\n\n[Verse 2]\nKu aman kar'na Kau menjaga\nKu kuat kar'na Kau menopang\nHidupku hanya ditentukan oleh kuasa-Mu\n\n[Chorus]\nBagi Tuhan tak ada yang mustahil\nBagi Tuhan tak ada yang tak mungkin\nMujizat-Nya disediakan bagiku\nKu diangkat dan dipulihkan-Nya",
     "theme": "Iman, pengharapan",
+    "bible": "Lukas 1:37",
     "notes": "Mulai lembut; atur klimaks sesuai arah WL.",
     "source": "F",
-    "bpm": "",
-    "key": "C",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Lukas 1:37"
+    "status": "Kandidat"
   },
   {
     "id": "s004",
     "title": "Dengan Sayap-Mu",
     "artist": "Sari Simorangkir",
+    "key": "C",
     "type": "W",
     "cats": [
       "O",
       "C"
     ],
+    "lyrics": "[Verse]\nFirman-Mu berkata Kau besertaku\nMaka kuat roh dan jiwaku\nTangan-Mu Tuhan selalu ku nantikan\nDi setiap langkah ku percaya\n\n[Chorus]\nDengan sayap-Mu\nKu akan terbang tinggi\nDi tengah badai hidup\nKu tak menyerah\nKau kekuatan dan perlindungan bagiku\n\nPertolonganku di tempat Maha Tinggi\nKu mengangkat tanganku\nAku berserah\nKau ku nantikan\nKau yang ku sembah\nYesusku Rajaku",
     "theme": "Perlindungan, kepercayaan",
+    "bible": "Mazmur 91:1–4",
     "notes": "Intro sederhana; dinamika hangat dan stabil.",
     "source": "F",
-    "bpm": "",
-    "key": "C",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 91:1–4"
+    "status": "Kandidat"
   },
   {
     "id": "s005",
@@ -101,19 +76,12 @@
       "O",
       "C"
     ],
+    "lyrics": "[Verse 1]\nTiada yang dapat pisahkan\n'Ku dari terangnya kasih-Mu\nKau hadirkan ketenangan\nYang tak bisa dunia berikan\n\n[Verse 2]\nKini Kau pegang hidupku\nDan Kau hapus kesalahanku\nBerharganya pengorbanan\nYang memberikan kes'lamatan\n\n[Chorus]\nKau hadir di setiap langkahku\nKu aman di dalam hadirat-Mu\nKau buktikan Engkau setia\n'Kan kuangkat tinggi tanganku\nTanda ku berserah kepada-Mu\nSelamanya Engkau setia\n\n[Bridge]\nOh, Your presence never leaves me\nAnd You'll never forsake me\nOh, Your presence never leaves me\nAnd You'll never forsake me",
     "theme": "Kesetiaan, kasih Tuhan",
+    "bible": "Ratapan 3:22–23",
     "notes": "Pad dan piano; siapkan penutup lembut.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Ratapan 3:22–23"
+    "status": "Kandidat"
   },
   {
     "id": "s006",
@@ -125,18 +93,10 @@
       "C"
     ],
     "theme": "Iman, penyertaan",
+    "bible": "Ibrani 11:1",
     "notes": "Akustik atau piano; jaga jangkauan vokal.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Ibrani 11:1"
+    "status": "Kandidat"
   },
   {
     "id": "s007",
@@ -148,62 +108,38 @@
       "C"
     ],
     "theme": "Pengharapan dalam pergumulan",
+    "bible": "Mazmur 46:1–3",
     "notes": "Jangan terburu-buru; berikan ruang bagi makna lagu.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 46:1–3"
+    "status": "Kandidat"
   },
   {
     "id": "s008",
     "title": "Di Sini di Hadirat-Mu",
-    "artist": "",
     "type": "W",
     "cats": [
       "O"
     ],
     "theme": "Hadirat Tuhan, penyembahan",
+    "bible": "Mazmur 27:4",
     "notes": "Piano dan pad; intro mudah dikenali.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 27:4"
+    "status": "Kandidat"
   },
   {
     "id": "s009",
     "title": "Bersorak-Sorai",
     "artist": "JPCC Worship / True Worshippers",
+    "key": "G",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Sukacita, kebesaran Tuhan",
+    "bible": "Mazmur 100:1–5",
     "notes": "Groove tegas; siapkan cue masuk dan ending bersama.",
     "source": "J",
-    "bpm": "",
-    "key": "G",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 100:1–5"
+    "status": "Kandidat"
   },
   {
     "id": "s010",
@@ -214,18 +150,10 @@
       "P"
     ],
     "theme": "Kemuliaan, iman",
+    "bible": "Filipi 2:9–11",
     "notes": "Bass dan drum kompak; jaga artikulasi vokal.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Filipi 2:9–11"
+    "status": "Kandidat"
   },
   {
     "id": "s011",
@@ -236,18 +164,10 @@
       "P"
     ],
     "theme": "Kristus Raja, pujian",
+    "bible": "Wahyu 19:16",
     "notes": "Tetapkan groove sesuai versi yang dipilih.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Wahyu 19:16"
+    "status": "Kandidat"
   },
   {
     "id": "s012",
@@ -258,266 +178,161 @@
       "P"
     ],
     "theme": "Kuasa Tuhan, iman",
+    "bible": "Efesus 3:20–21",
     "notes": "Bangun energi bertahap; kontrol fill drum.",
     "source": "J",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Efesus 3:20–21"
+    "status": "Kandidat"
   },
   {
     "id": "s013",
     "title": "Hari Ini Kurasa Bahagia",
-    "artist": "",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Persekutuan, sukacita",
+    "bible": "Mazmur 133:1",
     "notes": "Aransemen ringan; beri kesempatan jemaat bernyanyi.",
     "source": "H",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 133:1"
+    "status": "Kandidat"
   },
   {
     "id": "s014",
     "title": "Ku Kan Terbang",
-    "artist": "",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Iman, kekuatan Tuhan",
+    "bible": "Yesaya 40:31",
     "notes": "Groove konsisten; latihan transisi antarbait.",
     "source": "F",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yesaya 40:31"
+    "status": "Kandidat"
   },
   {
     "id": "s015",
     "title": "Hanya di Dalam Nama-Nya",
-    "artist": "",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Nama Yesus, keyakinan",
+    "bible": "Kisah Para Rasul 4:12",
     "notes": "Intro singkat dan ketukan jelas.",
     "source": "F",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Kisah Para Rasul 4:12"
+    "status": "Kandidat"
   },
   {
     "id": "s016",
     "title": "Datanglah dan Bertahta",
     "artist": "NDC Worship",
+    "key": "D",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Kerajaan Allah, kuasa Tuhan",
+    "bible": "Matius 6:10",
     "notes": "Siapkan build dan cue akhir.",
     "source": "R",
-    "bpm": "",
-    "key": "D",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Matius 6:10"
+    "status": "Kandidat"
   },
   {
     "id": "s017",
     "title": "Hatiku Penuh Nyanyian",
-    "artist": "",
     "type": "P",
     "cats": [
       "P"
     ],
     "theme": "Sukacita, pujian",
+    "bible": "Mazmur 95:1–2",
     "notes": "Aransemen sederhana dan mudah diikuti.",
     "source": "H",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 95:1–2"
+    "status": "Kandidat"
   },
   {
     "id": "s018",
     "title": "Ku Siapkan Hatiku Tuhan",
-    "artist": "",
     "type": "W",
     "cats": [
       "S"
     ],
     "theme": "Kesiapan menerima firman",
+    "bible": "Yakobus 1:21–22",
     "notes": "Jaga melodi jelas; hindari improvisasi panjang.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yakobus 1:21–22"
+    "status": "Kandidat"
   },
   {
     "id": "s019",
     "title": "Firman-Mu Pelita Bagiku",
-    "artist": "",
     "type": "W",
     "cats": [
       "S"
     ],
     "theme": "Firman Tuhan, tuntunan",
+    "bible": "Mazmur 119:105",
     "notes": "Piano lembut; tutup bersih sebelum mikrofon pengkhotbah.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 119:105"
+    "status": "Kandidat"
   },
   {
     "id": "s020",
     "title": "Penuhkanlah Bejanaku",
-    "artist": "",
     "type": "W",
     "cats": [
       "S"
     ],
     "theme": "Kerinduan, pembaruan",
+    "bible": "Roma 12:2",
     "notes": "Tempo stabil; jangan menambah pengulangan tanpa cue.",
     "source": "F",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Roma 12:2"
+    "status": "Kandidat"
   },
   {
     "id": "s021",
     "title": "Roh Kudus Roh Kebenaran",
-    "artist": "",
     "type": "W",
     "cats": [
       "S"
     ],
     "theme": "Roh Kudus, kebenaran",
+    "bible": "Yohanes 16:13",
     "notes": "Pad tipis, vokal utama jelas.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yohanes 16:13"
+    "status": "Kandidat"
   },
   {
     "id": "s022",
     "title": "Kau Berfirman",
-    "artist": "",
     "type": "W",
     "cats": [
       "S",
       "C"
     ],
     "theme": "Firman Tuhan, iman",
+    "bible": "Yesaya 55:10–11",
     "notes": "Beri ruang untuk perenungan; akhir terencana.",
     "source": "F",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yesaya 55:10–11"
+    "status": "Kandidat"
   },
   {
     "id": "s023",
     "title": "Lembutkan Hatiku",
-    "artist": "",
     "type": "W",
     "cats": [
       "S"
     ],
     "theme": "Kerendahan hati, kesiapan",
+    "bible": "Yehezkiel 36:26",
     "notes": "Aransemen minimal; jaga fokus pada doa.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yehezkiel 36:26"
+    "status": "Kandidat"
   },
   {
     "id": "s024",
     "title": "Bapa Kau Setia",
-    "artist": "",
+    "key": "D",
     "type": "W",
     "cats": [
       "O",
@@ -525,176 +340,107 @@
       "C"
     ],
     "theme": "Kesetiaan, rasa aman",
+    "bible": "Ulangan 7:9",
     "notes": "Piano dan gitar; hindari dinamika mendadak.",
     "source": "R",
-    "bpm": "",
-    "key": "D",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Ulangan 7:9"
+    "status": "Kandidat"
   },
   {
     "id": "s025",
     "title": "Bawa Persembahanmu",
-    "artist": "",
     "type": "P",
     "cats": [
       "G"
     ],
     "theme": "Persembahan, syukur",
+    "bible": "2 Korintus 9:7",
     "notes": "Gunakan groove ringan yang dapat diperpanjang sesuai kolekte.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "2 Korintus 9:7"
+    "status": "Kandidat"
   },
   {
     "id": "s026",
     "title": "Allah Itu Baik",
     "artist": "Welyar Kauntu",
+    "key": "A",
     "type": "P",
     "cats": [
       "P",
       "G"
     ],
     "theme": "Kebaikan Tuhan, syukur",
+    "bible": "Mazmur 100:5",
     "notes": "Gunakan versi jemaat yang dikenal; vamp opsional.",
     "source": "L",
-    "bpm": "",
-    "key": "A",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 100:5"
+    "status": "Kandidat"
   },
   {
     "id": "s027",
     "title": "Inilah Ungkapan Syukurku",
-    "artist": "",
     "type": "P",
     "cats": [
       "G"
     ],
     "theme": "Syukur, memberi",
+    "bible": "1 Tesalonika 5:18",
     "notes": "Aransemen ritmis yang hangat; konfirmasi versi setempat.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "1 Tesalonika 5:18"
+    "status": "Kandidat"
   },
   {
     "id": "s028",
     "title": "Mari Bawa Persembahan",
-    "artist": "",
     "type": "P",
     "cats": [
       "G"
     ],
     "theme": "Persembahan, syukur",
+    "bible": "2 Korintus 9:6–8",
     "notes": "Pilih versi bertempo sedang; siapkan ending fleksibel.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "2 Korintus 9:6–8"
+    "status": "Kandidat"
   },
   {
     "id": "s029",
     "title": "Kami Bawa Korban Pujian",
-    "artist": "",
     "type": "P",
     "cats": [
       "P",
       "G"
     ],
     "theme": "Syukur, pujian",
+    "bible": "Ibrani 13:15",
     "notes": "Jaga pola ritmis sederhana dan berulang.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Ibrani 13:15"
+    "status": "Kandidat"
   },
   {
     "id": "s030",
     "title": "Kasih-Nya Seperti Sungai",
-    "artist": "",
     "type": "P",
     "cats": [
       "P",
       "G"
     ],
     "theme": "Kasih Tuhan, sukacita",
+    "bible": "Roma 5:5",
     "notes": "Groove ringan; jangan menutupi suara jemaat.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Roma 5:5"
+    "status": "Kandidat"
   },
   {
     "id": "s031",
     "title": "Sungguh Kau Mempesona",
-    "artist": "",
     "type": "P",
     "cats": [
       "P",
       "G"
     ],
     "theme": "Anugerah, perubahan hidup",
+    "bible": "2 Korintus 5:17",
     "notes": "Tetapkan groove dan durasi kolekte.",
     "source": "R",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "2 Korintus 5:17"
+    "status": "Kandidat"
   },
   {
     "id": "s032",
@@ -706,106 +452,62 @@
       "C"
     ],
     "theme": "Komitmen, panggilan",
+    "bible": "2 Timotius 4:7–8",
     "notes": "Mulai reflektif; akhiri dengan resolusi yang jelas.",
     "source": "A",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "2 Timotius 4:7–8"
+    "status": "Kandidat"
   },
   {
     "id": "s033",
     "title": "Sertai Kami Tuhan",
-    "artist": "",
     "type": "W",
     "cats": [
       "C"
     ],
     "theme": "Penyertaan, pengutusan",
+    "bible": "Matius 28:20",
     "notes": "Aransemen sederhana; akhir tegas untuk doa berkat.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Matius 28:20"
+    "status": "Kandidat"
   },
   {
     "id": "s034",
     "title": "Utuslah Hamba-Mu",
-    "artist": "",
     "type": "W",
     "cats": [
       "C"
     ],
     "theme": "Pengutusan, pelayanan",
+    "bible": "Yesaya 6:8",
     "notes": "Jaga kejelasan makna; hindari outro panjang.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yesaya 6:8"
+    "status": "Kandidat"
   },
   {
     "id": "s035",
     "title": "Kasih Setia-Mu Menyertaiku",
-    "artist": "",
     "type": "W",
     "cats": [
       "C"
     ],
     "theme": "Penyertaan, kesetiaan",
+    "bible": "Mazmur 23:6",
     "notes": "Dinamika tenang dan penuh pengharapan.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Mazmur 23:6"
+    "status": "Kandidat"
   },
   {
     "id": "s036",
     "title": "Tuhan yang Bersama Kami",
-    "artist": "",
     "type": "W",
     "cats": [
       "C"
     ],
     "theme": "Penyertaan, keberanian",
+    "bible": "Yosua 1:9",
     "notes": "Akhiri bersama; beri ruang doa penutup.",
     "source": "R",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yosua 1:9"
+    "status": "Kandidat"
   },
   {
     "id": "s037",
@@ -817,40 +519,23 @@
       "C"
     ],
     "theme": "Anugerah, pengorbanan Kristus",
+    "bible": "Roma 5:8",
     "notes": "Piano dan pad; pilih key sesuai jemaat.",
     "source": "T",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Roma 5:8"
+    "status": "Kandidat"
   },
   {
     "id": "s038",
     "title": "Ajar Kami Melakukan Firman-Mu",
-    "artist": "",
     "type": "W",
     "cats": [
       "S",
       "C"
     ],
     "theme": "Ketaatan, respons atas firman",
+    "bible": "Yakobus 1:22",
     "notes": "Aransemen sederhana, arahkan pada komitmen.",
     "source": "L",
-    "bpm": "",
-    "key": "",
-    "status": "Kandidat",
-    "url": "",
-    "meter": "",
-    "form": "",
-    "meaning": "",
-    "lyrics": "",
-    "rights": "",
-    "bible": "Yakobus 1:22"
+    "status": "Kandidat"
   }
 ]
