@@ -2,26 +2,8 @@
   "schema": 1,
   "approvals": [
     {
-      "song_id": "s001",
-      "lyrics_sha256": "e21b4df976a18636cd788105f194fac1f8e2dd01a1e3f8f64966a6c78e9656c9",
-      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
-      "approval_type": "owner-confirmed-pilot",
-      "approved_by": "chndr455-netizen",
-      "approved_at": "2026-11-22T03:55:19.000Z",
-      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
-    },
-    {
       "song_id": "s002",
       "lyrics_sha256": "c33c6bd5e3628040417babd1178a6c9951d8cad354c7eba3f74d81fd35c8f7fb",
-      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
-      "approval_type": "owner-confirmed-pilot",
-      "approved_by": "chndr455-netizen",
-      "approved_at": "2026-11-22T03:55:19.000Z",
-      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
-    },
-    {
-      "song_id": "s003",
-      "lyrics_sha256": "052d482bbe45e940d759913627f9d81926722e37137f247fe51879d73a5ebed6",
       "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
       "approval_type": "owner-confirmed-pilot",
       "approved_by": "chndr455-netizen",
@@ -45,6 +27,51 @@
       "approved_by": "chndr455-netizen",
       "approved_at": "2026-11-22T03:55:19.000Z",
       "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    },
+    {
+      "song_id": "s001",
+      "lyrics_sha256": "e21b4df976a18636cd788105f194fac1f8e2dd01a1e3f8f64966a6c78e9656c9",
+      "rights_sha256": "d0d85a3080736247b309499a9e42ef5881cfc9af9e7bdb0f6ad1627baeb3db0a",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:19:23.793Z",
+      "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
+    },
+    {
+      "song_id": "s003",
+      "lyrics_sha256": "59a713e5a064de6322506cfab40ff6bea87e6f319a536a371a1eb1c5d9fc1591",
+      "rights_sha256": "d0d85a3080736247b309499a9e42ef5881cfc9af9e7bdb0f6ad1627baeb3db0a",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:19:23.849Z",
+      "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
+    },
+    {
+      "song_id": "s009",
+      "lyrics_sha256": "1bf169b70749021c2db3940a4ffba8cfac4220aa35402887bec1d4f8d0e1e166",
+      "rights_sha256": "296fcace94dcf938bf1641e46c9a9c63c4f8d30f596b652f80f0a061937f9850",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:19:23.894Z",
+      "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
+    },
+    {
+      "song_id": "s024",
+      "lyrics_sha256": "eb464b9781005ccb38635d59cd8639af9ecb9d60b2d230345b7b31b7d0db450a",
+      "rights_sha256": "296fcace94dcf938bf1641e46c9a9c63c4f8d30f596b652f80f0a061937f9850",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:19:23.937Z",
+      "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
+    },
+    {
+      "song_id": "s026",
+      "lyrics_sha256": "935b5808cd6589a125ca4a51f16bfb4538c73485945f3c4d5132a1d9a6a4596f",
+      "rights_sha256": "296fcace94dcf938bf1641e46c9a9c63c4f8d30f596b652f80f0a061937f9850",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:19:23.986Z",
+      "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
     }
   ]
 }
