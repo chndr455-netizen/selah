@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.5 — 2026-11-22
+- Refined the Ibadah screen into one service-name heading, a compact editable Tanggal/WL/Tema summary with explicit empty placeholders, and a clear Alur Ibadah action area.
+- Removed redundant second heading, always-visible save status and duplicate edit-menu icons. Segment rows now show the musical type and selected song(s), or “Belum pilih lagu”; tapping a row edits it, while the drag grip still reorders it.
+- Moved templates to a secondary action under the segments, preserving all setlist/template dialogs, data schemas, backup and offline behavior.
+- Updated the PWA app shell cache and release label for the layout change.
+
+
 ## Song Library — 2026-11-22
 
 - Added lyrics for Datanglah dan Bertahta and applied the submitted revision for Dengan Sayap-Mu. Ku Mau Cinta Yesus Selamanya already matched its submission. Marked publication permission Approved for all three. The catalog now has nine songs with lyrics.
