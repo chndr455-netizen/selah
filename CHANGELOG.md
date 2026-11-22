@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.4 — 2026-11-22
+- Applied the owner's pilot policy: permission-ledger matching no longer blocks public lyric display, CMS/content validation, version updates or publication preparation. Attribution fields, the copyright disclaimer and manual review remain.
+- Recorded the owner's explicit Approved decision for the existing s001–s005 text as optional editorial audit metadata, without claiming independent legal verification. No existing lyric or metadata value was changed.
+- Restored omitted optional strings for all 38 songs and generated the correct content hash, repairing the canonical schema and stale content version left by direct CMS saves.
+- Preserved field-level local overrides/clears, conflicts, storage/backups, offline support and submission behavior. Removed the runtime dependency on the permission ledger; optional approval tooling remains available.
+- Updated app/UI/cache to 0.5.4 and added pilot display, missing-ledger, content preservation, upgrade and offline regression coverage. See docs/LYRICS_PILOT.md.
+
 ## 0.5.3 — 2026-11-16
 - Replaced whole-record local overlays with three-way field merging on launch, refresh, import and saves from an editor open during refresh. Unchanged fields receive public updates; intentional local edits and clears remain. Conflicts, legacy ambiguous differences and hidden IDs survive reloads/backups without changing storage keys or schema.
 - Added read-only field comparisons under Edit. Local lyric text retains its exact whitespace; conflict handling never resets user data or silently replaces local values.

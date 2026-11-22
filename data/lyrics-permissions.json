@@ -1,4 +1,50 @@
 {
   "schema": 1,
-  "approvals": []
+  "approvals": [
+    {
+      "song_id": "s001",
+      "lyrics_sha256": "e21b4df976a18636cd788105f194fac1f8e2dd01a1e3f8f64966a6c78e9656c9",
+      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
+      "approval_type": "owner-confirmed-pilot",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T03:55:19.000Z",
+      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    },
+    {
+      "song_id": "s002",
+      "lyrics_sha256": "c33c6bd5e3628040417babd1178a6c9951d8cad354c7eba3f74d81fd35c8f7fb",
+      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
+      "approval_type": "owner-confirmed-pilot",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T03:55:19.000Z",
+      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    },
+    {
+      "song_id": "s003",
+      "lyrics_sha256": "052d482bbe45e940d759913627f9d81926722e37137f247fe51879d73a5ebed6",
+      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
+      "approval_type": "owner-confirmed-pilot",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T03:55:19.000Z",
+      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    },
+    {
+      "song_id": "s004",
+      "lyrics_sha256": "8e020da0970e9bff48b64bd75ece641dbc2792665746ec9b69b27b8c6ae10ea7",
+      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
+      "approval_type": "owner-confirmed-pilot",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T03:55:19.000Z",
+      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    },
+    {
+      "song_id": "s005",
+      "lyrics_sha256": "e68ae735f7f0b62e370c61470b44ad6c688f4f6ededf23c7dbf216b714ab488c",
+      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
+      "approval_type": "owner-confirmed-pilot",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T03:55:19.000Z",
+      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+    }
+  ]
 }

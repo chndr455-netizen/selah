@@ -1,5 +1,7 @@
 # Song synchronization investigation — 2026-11-16
 
+Historical report: the permission gate described here was superseded by the owner-approved 2026-11-22 pilot. See [current policy](LYRICS_PILOT.md).
+
 Baseline: `main` **7f78381**. The sync branch changes app/UI/cache to **0.5.3**; it does not alter any catalog entry, public lyric, approval record, frozen migration data or content version.
 
 ## Findings

@@ -1,73 +1,57 @@
-# Pages CMS Phase I — setup and publication
+# Pages CMS — editorial workflow and lyrics pilot
 
-SELAH stays a static PWA. The hosted [Pages CMS](https://app.pagescms.org) GitHub App edits `data/songs.json` on **cms/editorial**. No custom CMS, database, authentication, token field or application release is needed. `.pages.yml` is checked against Pages CMS **2.1.8**, source commit [`6f4e860`](https://github.com/pagescms/pagescms/tree/6f4e860a35d934406580287e7042e5e111e207a1).
+SELAH remains a static PWA. Hosted [Pages CMS](https://app.pagescms.org) edits the existing top-level `data/songs.json` array on **cms/editorial**. No backend, database or custom authentication was introduced. Configuration is tested against Pages CMS 2.1.8, revision `6f4e860a35d934406580287e7042e5e111e207a1`.
 
-## Owner activation (required before publishing)
+## Current pilot policy
 
-1. Review and merge the integration PR after its checks pass. The separate `cms/editorial` branch contains the same configuration and unchanged 38-song catalog. Do not edit content there until trusted-main workflows are merged.
-2. Sign in to app.pagescms.org with GitHub and install/authorize its hosted GitHub App for **chndr455-netizen/selah only**. Select **cms/editorial** in the CMS branch selector. Pin/bookmark that branch. Never enter a token in SELAH or commit a permission document.
-3. GitHub → Settings → Actions → General: allow GitHub Actions to create pull requests. The prepare workflow uses the repository's short-lived `GITHUB_TOKEN`, with explicit contents/PR/actions permissions. It does not use a personal token. If your plan/policy disallows bot PR creation, the job leaves its prepared branch; create the PR manually from that branch and run Validate SELAH via Actions on the publication branch.
-4. Protect **main** with a ruleset/branch protection: require a PR, at least one approval and code-owner review; require **Validate SELAH / validate**, require the branch to be up to date, block force pushes/deletions, and **do not allow bypass** by Pages CMS, Actions, administrators or other actors. CODEOWNERS names the owner. Publication PRs are authored by Actions so the owner can review/approve them. If sole-owner approval policies conflict with other author identities, use a trusted reviewer; do not bypass the lyric/content gate.
-5. Keep GitHub Pages deployment on **main / root**, never cms/editorial. Complete the hosted-save checklist below before using the CMS for publication.
+On 2026-11-22 the owner explicitly marked the existing s001–s005 lyrics **Approved** and requested removal of publication-permission matching as a technical condition. The PWA and content validator now accept lyrics without an approval-ledger entry, including when that optional ledger is missing or stale. `data/lyrics-permissions.json` records the five owner editorial decisions and exact text hashes for context; it is not consulted to authorize display or publication.
 
-These settings require repository-owner access. `.pages.yml` cannot lock the CMS branch selector, set GitHub branch protection or prevent an authorized actor from bypassing an unprotected branch. GitHub API access in the implementation environment returned Forbidden; activation/protection and a real authenticated hosted save were **not verified**. Do not treat the integration as an enforced publication boundary until these steps are complete.
+Keep the attribution/rights fields, existing copyright disclaimer and manual owner review. The disclaimer itself does not grant a license, and an owner editorial record is not independent legal verification. Do not invent credits/authorization or put private evidence, credentials or journals in this public repository. Submission consent/permission warnings remain informational and never block pilot publication.
 
-## Editing and publishing
+## Setup and editing
 
-1. In **cms/editorial → Pustaka Lagu**, expand a song. Every existing song field is represented, including legacy source, URL, rights, and empty optional fields. Keep existing IDs unchanged. Additions use an unused stable ID such as s039; duplicates/removals/renames of existing IDs fail validation. Phase I deliberately blocks deletion.
-2. Enter only known metadata. Key examples: C, F#, Bb, Am, F#m, C/E; blank is allowed. BPM is a **string** containing 20–300 or blank, not a numeric field. Categories allow multiple O/P/S/G/C values. Lyrics/notes/meaning use plain text, not rich text. Save as many edits as needed. These are Git commits to the editorial branch and do not deploy the app.
-3. Check **Validate CMS draft** in GitHub Actions. It checks the exact saved snapshot using trusted main code and main's permission ledger. A failed draft check does not undo your save, but blocks preparation. Fix errors before proceeding.
-4. Save all changes, then choose **Siapkan publikasi untuk review** in the CMS file actions. The action dispatches `cms-publish.yml` on main. If that menu/action is unavailable in your hosted version, open GitHub Actions → **Prepare CMS publication** → Run workflow → **main**. Both routes read the latest saved cms/editorial snapshot. CMS context payloads are ignored; they cannot choose a different branch or execute code.
-5. The job restores the complete schema, validates IDs/keys/permissions, merges independent changes on main and blocks same-field conflicts. It creates **cms/publish-… → main** containing only songs, content version and the editorial checkpoint. No changes means no PR/version bump. It never merges automatically.
-6. Review the exact diff, rights evidence and passing validation; approve and merge manually. Do not add unrelated code or approvals into the generated PR. Re-run preparation if main moved or a conflict appeared. Required up-to-date checks prevent merging a stale result. The checkpoint supports normal, squash and rebase merges, so several later editorial batches remain independent.
+1. Connect the hosted GitHub App to chndr455-netizen/selah and select **cms/editorial**, not main. After merging the pilot PR, update the editorial branch from main so its configuration and catalog match the latest reviewed baseline. Preserve any pending edits and resolve conflicts explicitly; do not force-reset the branch.
+2. Keep GitHub Pages on main/root. Allow repository Actions to create PRs; protect main with reviewed PRs, code-owner review, required **Validate SELAH / validate**, up-to-date checks and no bypass/force pushes. These protect the content workflow, not a permission-ledger prerequisite.
+3. Edit existing songs or add an unused stable ID (s039, etc.). Do not change/remove old IDs. All 18 existing fields remain present; BPM is text, categories are an array, lyrics are plain text. Leave unknown credits/musical values blank. Save multiple edits before publication.
+4. Check **Validate CMS draft**. It runs trusted-main code, restores missing optional strings, checks IDs/schema/musical keys and detects concurrent edits. Permission metadata is not required. Git commits on any public branch are publicly readable.
+5. Save everything, then choose **Siapkan publikasi untuk review**, or GitHub Actions → **Prepare CMS publication** → Run on **main**. Preparation reads the saved editorial snapshot, three-way merges independent main updates and opens a publication PR. It never merges automatically.
+6. Review the song diff, attribution, context and validation, then approve/merge manually. The generated PR changes only catalog, content version and editorial checkpoint. A repeated unchanged draft produces no PR/version bump. Checkpoints support later batches after normal or squash merges.
 
-A failed PR/API step can leave a prepared branch. Recover by creating a PR from that branch and running the **Validate SELAH** workflow on that branch; the required check must pass before merge. Do not merge a sparse editorial file directly into main. Do not merge the whole editorial branch: publication uses current main's application and scripts, not an older editorial copy.
+`.pages.yml` cannot enforce the branch selector or GitHub protections. Repository-owner activation, effective protections, hosted UI saves and remote Actions execution need owner verification; GitHub API access from the implementation environment has returned Forbidden. Local source-based tests do not claim a hosted authenticated save.
 
-## Verified lyrics
+## Optional approval record
 
-A public repo exposes **all branches and commit history**, even before Pages deployment. Do not paste unapproved lyrics, credentials, private journal data or confidential permission documents into editorial commits. Use approved text only after the owner has reviewed a lawful publication basis.
+The old approval workflow is retained as **Record optional owner lyric approval**. It prepares an audit-only PR when the owner wants one; it is never a prerequisite for publishing a song. Its confirmation describes an editorial decision, not a legal determination.
 
-`rights` is a public attribution/authorization note; it does not prove authorization. `data/lyrics-permissions.json` contains reviewed records with `song_id`, SHA-256 hashes of exact UTF-8 `lyrics` and `rights`, `approved_by`, UTC `approved_at`, and a concise public `basis`. There are no approvals initially because all 38 lyrics are blank. Any nonblank lyric without a matching record fails validation. Changing even punctuation/line endings or the rights note invalidates its approval.
-
-Owner/reviewer procedure (entirely through GitHub/CMS):
-
-1. Review exact text and permission evidence privately. Only after authorization is established, enter that authorized text and its public rights note in the editorial draft. Do not commit private evidence. The draft check stays red until the matching approval is reviewed on main.
-2. GitHub Actions → **Prepare lyric permission review** → Run workflow on **main**. Enter the stable song ID and a concise public basis, and confirm that you reviewed permission. It reads the saved draft, records hashes with your actual GitHub login, and creates an **approval-only PR**. This records your decision; software does not verify legal rights. No song/app/content version is changed.
-3. Review that bot-authored PR and the authorization, approve and merge under the protected-main policy. A record can precede a new song's addition to the main catalog. Then run **Siapkan publikasi untuk review** for the songs. Publication reads only main's ledger, never a draft record from editorial.
-4. If the text/rights hash differs, obtain a fresh review; do not weaken validation. The same branch/PR recovery procedure applies if Actions cannot create the permission PR.
-
-For a reviewer who prefers local tools, the equivalent helper is:
+Local equivalent:
 
 ```sh
 node scripts/approve-lyrics.mjs --song s001 --by chndr455-netizen \
-  --basis 'Ringkasan dasar izin publik yang sudah diperiksa' \
-  --catalog /path/to/authorized-catalog.json
+  --basis 'Owner editorial decision and public context' \
+  --catalog /path/to/catalog.json
 ```
 
-It prepares a ledger change only. Submit a separate reviewed PR; it never approves or publishes automatically.
+Records include exact lyric/rights hashes, reviewer, timestamp and context. Existing records are retained. Missing, stale or absent records cannot hide lyrics or stop the publisher.
 
-Trust ultimately comes from owner review and protected main. A fabricated record merged by an authorized bypass cannot be detected as a legal determination by software. The app's submission opt-in remains unverified and cannot create a ledger approval.
+## Format, versions and recovery
 
-## Format preservation and versioning
-
-- The file is still a top-level JSON array with the same 18 fields. Strings stay strings, `cats` stays an array, existing IDs stay stable. All 38 songs are unchanged by integration.
-- Pages CMS's root-list save removes empty strings and its `settings.content.merge` excludes root lists. We therefore configure every existing field and restore omitted optional strings in publication preparation. An absent optional field means empty/cleared in the draft; review clearings carefully. Required fields cannot be omitted. Unknown fields/schema drift fail instead of being silently dropped. Do not introduce hidden future fields without updating configuration and tests together.
-- The pinned upstream test runs real config validation, initialization, field validators, mapping and sanitization, including a hidden `source` variant. It proves IDs/nonempty fields survive and normalization restores blank fields. It is **not** an authenticated hosted CMS save or GitHub Actions run.
-- `version.content` becomes `sha256-<canonical-catalog-hash>` (the full hash is grouped in eight-character blocks so the existing mobile version label can wrap) only when catalog content changes. `version.app` remains 0.5.2. For a direct reviewed content PR, run `node scripts/version-content.mjs`. Validation rejects a catalog change with a stale/incorrect content version.
-- `data/cms-publication.json` records the last reviewed editorial snapshot, allowing safe three-way merging even after squash. Do not reset/rewrite editorial history or hand-edit this checkpoint. Unrelated main edits survive; competing edits to the same field stop with an ID/field conflict message. Resolve deliberately on the editorial branch, retaining current main content as appropriate.
-- There are no PWA asset, service worker, storage key/schema or submission-format changes. Existing network-first catalog/version fetching, offline cache fallback, local overlays and submission originals remain intact. Changing a song never updates the frozen `data/legacy-v02.json`.
+- Root JSON array, all 18 fields, stable IDs, string values and category arrays remain unchanged. The pilot restores only missing optional strings; every pre-existing value and lyric byte is retained.
+- Pages CMS omits empty strings and does not merge hidden unknown fields for root lists. Every known field is configured; publication normalizes those omissions. Unknown fields/schema drift fail for review. Missing optional fields in a CMS draft mean empty/cleared; review intentional clears carefully.
+- Run `node scripts/version-content.mjs` for a direct content PR. `version.content` is the full canonical SHA-256 hash grouped for mobile wrapping. Content-only changes do not increment the app/SW version. The pilot itself changes runtime behavior, so app/UI/cache advance to 0.5.4.
+- Never hand-edit `data/cms-publication.json`, reset editorial history, publish the frozen migration file, or merge a sparse editorial array directly into main. Preparation takes app/scripts from current main, not an older editorial tree.
+- If bot PR creation fails, use the prepared branch to open a PR manually and run **Validate SELAH** on that branch. No workflow merges automatically.
+- Existing local lyric edits/clears, song IDs, setlists, progress, reflections and full backups are preserved by the field-level merger. Do not reset local storage to reveal public lyrics. Ambiguous legacy local differences stay available under Edit for review.
 
 ## Validation and hosted acceptance
 
-Development checks (npm tools are development-only; preview still needs no build):
-
 ```sh
 npm ci
+node tests/validate.mjs
 node tests/cms-content.mjs
 node tests/cms-editorial.mjs
 node scripts/check-content.mjs
-node tests/validate.mjs
 node tests/catalog-merge.mjs
+node tests/public-catalog.mjs
 node tests/service-model.mjs
 node tests/song-submission.mjs
 node tests/service-song-picker.mjs
@@ -75,13 +59,6 @@ node tests/service-song-picker.mjs
 SELAH_PAGES_CMS_SOURCE=/path/to/pagescms node tests/pages-cms-upstream.mjs
 ```
 
-CI also checks out that exact upstream revision and runs the save audit. Headless UI stubs replace React components and unused filename helpers only; the tested config/schema/save transforms are upstream source. No CMS service is run locally.
+The source audit uses actual upstream validators/save transformations, with headless UI stubs. It is not a hosted CMS deployment. Before normal production use, test two harmless metadata saves on the editorial branch, prepare a PR, and confirm all IDs/fields/text are preserved, app version stays unchanged and content version updates. Test invalid IDs/keys/required fields fail while lyrics with an empty optional permission ledger pass. Close/revert disposable test edits without force-resetting history.
 
-Before production use, owner must test **on cms/editorial**, without merging test edits:
-
-- Confirm all 38 songs and all fields load. Edit one harmless metadata field, save, then inspect the Git diff. Nonempty `source`, all IDs and data types must remain; omitted blank strings are expected and restored by preparation.
-- Make a second edit and prepare a publication PR. Confirm only intended changes appear, all 18 fields are restored, the count/IDs remain, the content version changes and app/SW versions do not. Close the test PR and revert the test commits on editorial; do not force-reset history.
-- Add a new dummy entry only in a disposable test branch, test duplicate IDs, blank title, invalid key and unapproved **self-authored test text**; confirm checks reject them. Never use third-party/private text for testing.
-- Test a legitimate reviewed content update after merge: unchanged local records refresh, local song overrides remain, offline reload works, and an EDIT submission captures the refreshed content version/original. Physical hosted/browser behavior remains an owner acceptance step.
-
-See [implementation evidence](EVIDENCE.md) for checks actually performed and outstanding activation steps.
+After deployment, verify public refresh, intentional local overrides and offline reload on target devices. See [pilot evidence](../LYRICS_PILOT.md) and the [historical Phase I report](EVIDENCE.md).

@@ -15,7 +15,12 @@
     "notes": "Piano dan pad; bangun secara bertahap, akhiri dengan tenang.",
     "source": "J",
     "rights": "Ok",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": ""
   },
   {
     "id": "s002",
@@ -33,7 +38,13 @@
     "notes": "Piano atau gitar akustik; pertahankan ruang untuk jemaat.",
     "source": "K",
     "rights": "Ok",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": ""
   },
   {
     "id": "s003",
@@ -51,7 +62,12 @@
     "notes": "Mulai lembut; atur klimaks sesuai arah WL.",
     "source": "F",
     "rights": "Ok",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": ""
   },
   {
     "id": "s004",
@@ -69,7 +85,12 @@
     "notes": "Intro sederhana; dinamika hangat dan stabil.",
     "source": "F",
     "rights": "Ok",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": ""
   },
   {
     "id": "s005",
@@ -86,7 +107,13 @@
     "notes": "Pad dan piano; siapkan penutup lembut.",
     "source": "J",
     "rights": "Ok",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": ""
   },
   {
     "id": "s006",
@@ -101,7 +128,15 @@
     "bible": "Ibrani 11:1",
     "notes": "Akustik atau piano; jaga jangkauan vokal.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s007",
@@ -116,7 +151,15 @@
     "bible": "Mazmur 46:1–3",
     "notes": "Jangan terburu-buru; berikan ruang bagi makna lagu.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s008",
@@ -129,7 +172,16 @@
     "bible": "Mazmur 27:4",
     "notes": "Piano dan pad; intro mudah dikenali.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s009",
@@ -144,7 +196,14 @@
     "bible": "Mazmur 100:1–5",
     "notes": "Groove tegas; siapkan cue masuk dan ending bersama.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s010",
@@ -158,7 +217,15 @@
     "bible": "Filipi 2:9–11",
     "notes": "Bass dan drum kompak; jaga artikulasi vokal.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s011",
@@ -172,7 +239,15 @@
     "bible": "Wahyu 19:16",
     "notes": "Tetapkan groove sesuai versi yang dipilih.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s012",
@@ -186,7 +261,15 @@
     "bible": "Efesus 3:20–21",
     "notes": "Bangun energi bertahap; kontrol fill drum.",
     "source": "J",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s013",
@@ -199,7 +282,16 @@
     "bible": "Mazmur 133:1",
     "notes": "Aransemen ringan; beri kesempatan jemaat bernyanyi.",
     "source": "H",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s014",
@@ -212,7 +304,16 @@
     "bible": "Yesaya 40:31",
     "notes": "Groove konsisten; latihan transisi antarbait.",
     "source": "F",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s015",
@@ -225,7 +326,16 @@
     "bible": "Kisah Para Rasul 4:12",
     "notes": "Intro singkat dan ketukan jelas.",
     "source": "F",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s016",
@@ -240,7 +350,14 @@
     "bible": "Matius 6:10",
     "notes": "Siapkan build dan cue akhir.",
     "source": "R",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s017",
@@ -253,7 +370,16 @@
     "bible": "Mazmur 95:1–2",
     "notes": "Aransemen sederhana dan mudah diikuti.",
     "source": "H",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s018",
@@ -266,7 +392,16 @@
     "bible": "Yakobus 1:21–22",
     "notes": "Jaga melodi jelas; hindari improvisasi panjang.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s019",
@@ -279,7 +414,16 @@
     "bible": "Mazmur 119:105",
     "notes": "Piano lembut; tutup bersih sebelum mikrofon pengkhotbah.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s020",
@@ -292,7 +436,16 @@
     "bible": "Roma 12:2",
     "notes": "Tempo stabil; jangan menambah pengulangan tanpa cue.",
     "source": "F",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s021",
@@ -305,7 +458,16 @@
     "bible": "Yohanes 16:13",
     "notes": "Pad tipis, vokal utama jelas.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s022",
@@ -319,7 +481,16 @@
     "bible": "Yesaya 55:10–11",
     "notes": "Beri ruang untuk perenungan; akhir terencana.",
     "source": "F",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s023",
@@ -332,7 +503,16 @@
     "bible": "Yehezkiel 36:26",
     "notes": "Aransemen minimal; jaga fokus pada doa.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s024",
@@ -348,7 +528,15 @@
     "bible": "Ulangan 7:9",
     "notes": "Piano dan gitar; hindari dinamika mendadak.",
     "source": "R",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s025",
@@ -361,7 +549,16 @@
     "bible": "2 Korintus 9:7",
     "notes": "Gunakan groove ringan yang dapat diperpanjang sesuai kolekte.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s026",
@@ -377,7 +574,14 @@
     "bible": "Mazmur 100:5",
     "notes": "Gunakan versi jemaat yang dikenal; vamp opsional.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s027",
@@ -390,7 +594,16 @@
     "bible": "1 Tesalonika 5:18",
     "notes": "Aransemen ritmis yang hangat; konfirmasi versi setempat.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s028",
@@ -403,7 +616,16 @@
     "bible": "2 Korintus 9:6–8",
     "notes": "Pilih versi bertempo sedang; siapkan ending fleksibel.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s029",
@@ -417,7 +639,16 @@
     "bible": "Ibrani 13:15",
     "notes": "Jaga pola ritmis sederhana dan berulang.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s030",
@@ -431,7 +662,16 @@
     "bible": "Roma 5:5",
     "notes": "Groove ringan; jangan menutupi suara jemaat.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s031",
@@ -445,7 +685,16 @@
     "bible": "2 Korintus 5:17",
     "notes": "Tetapkan groove dan durasi kolekte.",
     "source": "R",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s032",
@@ -460,7 +709,15 @@
     "bible": "2 Timotius 4:7–8",
     "notes": "Mulai reflektif; akhiri dengan resolusi yang jelas.",
     "source": "A",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s033",
@@ -473,7 +730,16 @@
     "bible": "Matius 28:20",
     "notes": "Aransemen sederhana; akhir tegas untuk doa berkat.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s034",
@@ -486,7 +752,16 @@
     "bible": "Yesaya 6:8",
     "notes": "Jaga kejelasan makna; hindari outro panjang.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s035",
@@ -499,7 +774,16 @@
     "bible": "Mazmur 23:6",
     "notes": "Dinamika tenang dan penuh pengharapan.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s036",
@@ -512,7 +796,16 @@
     "bible": "Yosua 1:9",
     "notes": "Akhiri bersama; beri ruang doa penutup.",
     "source": "R",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s037",
@@ -527,7 +820,15 @@
     "bible": "Roma 5:8",
     "notes": "Piano dan pad; pilih key sesuai jemaat.",
     "source": "T",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   },
   {
     "id": "s038",
@@ -541,6 +842,15 @@
     "bible": "Yakobus 1:22",
     "notes": "Aransemen sederhana, arahkan pada komitmen.",
     "source": "L",
-    "status": "Kandidat"
+    "status": "Kandidat",
+    "artist": "",
+    "bpm": "",
+    "key": "",
+    "url": "",
+    "meter": "",
+    "form": "",
+    "meaning": "",
+    "lyrics": "",
+    "rights": ""
   }
 ]

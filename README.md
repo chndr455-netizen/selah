@@ -1,4 +1,4 @@
-# SELAH v0.5.3 — Field-level Song Synchronization / PWA
+# SELAH v0.5.4 — Owner-approved Lyrics Pilot / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -14,11 +14,11 @@ Docs: https://docs.github.com/en/pages/getting-started-with-github-pages/configu
 Run `python3 -m http.server 8000` from the repo root, then open `http://localhost:8000/`. Do not double-click `index.html` (`file://` does not support the fetch / PWA architecture). No npm install/build required. Localhost or HTTPS is required for service workers.
 
 ## Content vs local data
-Published source of truth: `data/songs.json` (public). Each song can have multiple service categories, key, BPM, meter, form, lyrics, meaning, Bible references, notes, source and rights. No chord charts. Unknown values are blank. All existing 38 base profiles migrated; full lyrics remain blank until authorized. Other educational material lives in `index.html` in this release; extraction into separate data files is a later improvement.
+Published source of truth: `data/songs.json` (public). Each song can have multiple service categories, key, BPM, meter, form, lyrics, meaning, Bible references, notes, source and rights. No chord charts. Unknown values are blank. All existing 38 base profiles migrated; the five pilot songs have owner-approved lyrics; other unknown fields remain blank. Other educational material lives in `index.html` in this release; extraction into separate data files is a later improvement.
 
 Local add/edit/delete makes an overlay visible only on that browser/device. The public catalog is checked on launch and on clicking “Muat pembaruan publik”. Changes merge per field against the last public baseline: unedited local fields receive public updates, and intentional edits/clears stay local. Concurrent changes preserve the local value and record a comparison under Edit → Periksa perbedaan lokal. Local deletions remain hidden. Ambiguous differences from old whole-record merging are preserved for review. “Pulihkan pustaka publik” discards song overrides, not journal or academy progress, and preserves setlist references, including missing songs. Export backups before reset. A v0.2 backup can be imported (migration uses frozen baseline). Local data isn't encrypted or synced. A separate origin (old local file vs GitHub Pages URL) cannot be read automatically; export JSON from old file and import on the new site, only if desired. Never publish that backup: it can contain personal notes and lyrics.
 
-New public lyrics require exact reviewed lyric/rights hashes. Unverified incoming text is withheld without deleting previous/local lyrics; metadata can still load from a sparse CMS record. Mismatched hashes or a reused content version are shown as unknown for submissions. Full backups retain sync conflicts and hidden IDs under the same storage key/schema. See [s001 investigation and validation](docs/SONG_SYNC_INVESTIGATION.md). The strict publication checks remain required.
+The owner approved the five existing pilot lyric entries on 2026-11-22 and removed permission-record matching as a technical publication condition. Lyrics load without a ledger entry; optional owner approval records retain context without claiming independent legal verification. Attribution, the existing copyright disclaimer, manual PR review, schema/ID validation and content-version checks remain. Local edits/clears, conflicts and full backups are preserved. See [pilot policy and validation](docs/LYRICS_PILOT.md); the earlier [sync investigation](docs/SONG_SYNC_INVESTIGATION.md) is historical.
 
 ## Pengajuan lagu (v0.5.1)
 
@@ -28,7 +28,7 @@ Kirim berkas `selah-add-judul.json` / `selah-edit-judul.json` atau teks JSON ke 
 
 ## Pages CMS — Pustaka Lagu
 
-Gunakan Pages CMS di `cms/editorial` untuk menyunting seluruh kolom lagu. Beberapa simpanan dapat digabung dalam satu publikasi. **Siapkan publikasi untuk review** menjalankan validasi dan menyiapkan PR; owner meninjau lalu merge secara manual. Versi konten diperbarui dari hash katalog tanpa rilis aplikasi. Lirik memerlukan catatan izin yang telah ditinjau dan cocok dengan teks persisnya; tidak cukup mengisi kolom izin.
+Gunakan Pages CMS di `cms/editorial` untuk menyunting seluruh kolom lagu. Beberapa simpanan dapat digabung dalam satu publikasi. **Siapkan publikasi untuk review** menjalankan validasi dan menyiapkan PR; owner meninjau lalu merge secara manual. Versi konten diperbarui dari hash katalog tanpa rilis aplikasi. Pada pilot ini, catatan izin bersifat opsional dan tidak menghalangi publikasi; owner tetap meninjau konten, atribusi dan konteksnya sebelum merge.
 
 [Petunjuk aktivasi dan penggunaan](docs/cms/README.md). Koneksi GitHub App, perlindungan main dan uji simpan pada hosted CMS harus diselesaikan owner sebelum digunakan untuk publikasi. Aplikasi tetap statis; tidak ada database/backend/autentikasi baru. `npm ci` hanya untuk alat validasi pengembangan, bukan untuk menjalankan PWA.
 

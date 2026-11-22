@@ -5,7 +5,7 @@ settings:
 content:
   - name: songs
     label: Pustaka Lagu
-    description: 'Draf di cms/editorial. Simpan beberapa perubahan, lalu jalankan Siapkan publikasi. Jangan menyunting main. Lirik memerlukan izin yang telah diverifikasi.'
+    description: 'Draf di cms/editorial. Simpan beberapa perubahan, lalu jalankan Siapkan publikasi. Jangan menyunting main. Pilot: catatan persetujuan bersifat opsional; publikasi tetap melalui review owner.'
     type: file
     path: data/songs.json
     format: json
@@ -61,7 +61,7 @@ content:
       - name: lyrics
         label: Lirik
         type: text
-        description: 'Teks biasa, bukan Markdown. Kosongkan sampai izin atas teks persis ini disetujui dan tercatat di data/lyrics-permissions.json. Catatan izin saja bukan verifikasi.'
+        description: 'Teks biasa, bukan Markdown. Sertakan teks yang dipilih owner untuk publikasi. Catatan izin bersifat opsional dan tidak menghalangi penyimpanan atau publikasi pada pilot ini.'
       - name: form
         label: Alur lagu
         type: string
@@ -99,7 +99,7 @@ content:
       - name: rights
         label: Atribusi / sumber / dasar izin publikasi
         type: text
-        description: 'Catatan publik saja; jangan masukkan dokumen izin rahasia atau kontak pribadi. Verifikasi owner dicatat terpisah berdasarkan hash teks dan catatan izin.'
+        description: 'Catatan publik saja; jangan masukkan dokumen izin rahasia atau kontak pribadi. Catatan persetujuan editorial owner dapat disimpan terpisah; bukan persyaratan teknis publikasi atau bukti lisensi otomatis.'
       - name: status
         label: Status
         type: select

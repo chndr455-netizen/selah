@@ -18,18 +18,8 @@ export function normalizeDraft(raw){
   return Object.fromEntries(FIELDS.map(key=>[key,Object.hasOwn(song,key)?song[key]:key==='cats'?[]:'']));
  });
 }
-export function validateCatalog(songs,permissions,{base=[]}={}){
+export function validateCatalog(songs,_permissions=null,{base=[]}={}){
  assert(Array.isArray(songs)&&songs.length>0,'Katalog harus berupa array.');const ids=new Set();
- assert(permissions?.schema===1&&Array.isArray(permissions.approvals),'Daftar verifikasi izin tidak valid.');
- const approvals=new Map();
- for(const a of permissions.approvals){
-  assert(a&&typeof a.song_id==='string'&&!approvals.has(a.song_id),'ID verifikasi izin kosong/duplikat.');
-  for(const k of ['lyrics_sha256','rights_sha256'])assert(/^[a-f0-9]{64}$/.test(a[k]),`Hash izin tidak valid: ${a.song_id}`);
-  assert(typeof a.approved_by==='string'&&/^[A-Za-z0-9-]+$/.test(a.approved_by),'Identitas peninjau wajib diisi.');
-  assert(typeof a.basis==='string'&&a.basis.trim(),'Dasar izin publik wajib diisi.');
-  assert(typeof a.approved_at==='string'&&/^\d{4}-\d{2}-\d{2}T/.test(a.approved_at)&&Number.isFinite(Date.parse(a.approved_at)),'Waktu verifikasi tidak valid.');
-  approvals.set(a.song_id,a);
- }
  for(const song of songs){
   assert(song&&Object.keys(song).length===FIELDS.length&&FIELDS.every(k=>Object.hasOwn(song,k)),`Kolom lagu hilang/berlebih: ${song?.id}`);
   for(const k of STRING_FIELDS)assert.equal(typeof song[k],'string',`${song.id}.${k} harus teks.`);
@@ -41,9 +31,7 @@ export function validateCatalog(songs,permissions,{base=[]}={}){
   assert(song.meter===''||/^[1-9][0-9]*\/(?:1|2|4|8|16|32)$/.test(song.meter),`Birama tidak valid: ${song.id}`);
   assert(['Kandidat','Dalam latihan','Siap'].includes(song.status),`Status tidak valid: ${song.id}`);
   if(song.url){const url=new URL(song.url);assert(['http:','https:'].includes(url.protocol)&&!url.username&&!url.password,`Tautan tidak valid/mengandung kredensial: ${song.id}`)}
-  if(song.lyrics.trim()){
-   const a=approvals.get(song.id);assert(song.rights.trim()&&a&&a.lyrics_sha256===digest(song.lyrics)&&a.rights_sha256===digest(song.rights),`Izin lirik belum diverifikasi untuk teks/catatan persis ini: ${song.id}`);
-  }
+
  }
  for(const old of base)assert(ids.has(old.id),`ID lama dihapus/diubah: ${old.id}`);
  return songs;

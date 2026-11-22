@@ -51,9 +51,9 @@ jobs:
           cat > "$RUNNER_TEMP/selah-pr.md" <<BODY
           Prepared from editorial snapshot $EDITORIAL_SHA using trusted main validation.
 
-          Schema, stable IDs, musical keys, verified lyric hashes and three-way conflict checks passed. Only the catalog, content version and editorial checkpoint change. The application version is unchanged.
+          Schema, stable IDs, musical keys and three-way conflict checks passed. Permission records are optional editorial notes under the owner-approved pilot. Only the catalog, content version and editorial checkpoint change. The application version is unchanged.
 
-          Review the song diff and permission evidence before merging. This workflow never merges automatically.
+          Review the song diff, attribution and editorial context before merging. This workflow never merges automatically.
           BODY
           gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title 'Content: publish reviewed Song Library edits' --body-file "$RUNNER_TEMP/selah-pr.md"
           gh workflow run validate.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"
