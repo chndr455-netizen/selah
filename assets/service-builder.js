@@ -15,10 +15,28 @@ export function createServiceBuilder({getState,save,storageReady,notify,download
   if(lastState!==state()){if(lastState){closeDialogs();draft=null}templateId=null;lastState=state()}
   if(templateId&&!state().templates.some(t=>t.id===templateId))templateId=null;
   if($('serviceSongPicker').open)renderSongPicker();
-  const current=plan();$('templateMode').hidden=!templateId;$('serviceName').textContent=current.name;
-  $('serviceMeta').textContent=templateId?'Template lokal': [current.date,current.wl,current.theme].filter(Boolean).join(' · ')||'Detail ibadah';
+  const current=plan(),isTemplate=Boolean(templateId);
+  $('templateMode').hidden=!isTemplate;
+  $('serviceName').textContent=current.name;
+  $('serviceOverview').classList.toggle('is-template',isTemplate);
+  $('serviceFacts').hidden=isTemplate;
+  const displayDate=(value)=>{
+   if(!value)return '';
+   if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(value))return value;
+   const d=new Date(value+'T12:00:00');
+   return Number.isNaN(d.getTime())?value:d.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+  };
+  for(const [id,value] of [['serviceDateValue',displayDate(current.date)],['serviceWLValue',current.wl],['serviceThemeValue',current.theme]]){
+   const target=$(id),hasValue=Boolean(String(value||'').trim());
+   target.textContent=hasValue?value:'Belum ditentukan';
+   target.classList.toggle('service-placeholder',!hasValue);
+  }
   $('setSummary').textContent=`${current.segments.length} segmen · ${current.segments.reduce((n,s)=>n+s.songs.filter(e=>e.songId).length,0)} lagu`;
-  $('slots').innerHTML=current.segments.map((s,i)=>`<li class="service-segment" data-segment-id="${esc(s.id)}"><button class="segment-drag iconbtn" data-builder="drag" data-id="${esc(s.id)}" aria-label="Urutkan ${esc(s.name)}. Alt dan panah atas/bawah, atau Naik/Turun di editor.">${icon('grip')}</button><button class="segment-summary" data-builder="edit-segment" data-id="${esc(s.id)}"><strong>${i+1}. ${esc(s.name)}</strong><small>${esc(s.songs.some(e=>e.songId)?s.songs.filter(e=>e.songId).map(e=>resolvedEntry(e,state().songs).title).join(' / '):SEGMENT_TYPES[s.type])}</small></button><button class="iconbtn" data-builder="edit-segment" data-id="${esc(s.id)}" aria-label="Edit ${esc(s.name)}">${icon('menu')}</button></li>`).join('')||'<li class="empty">Belum ada segmen. Tambahkan sesuai kebutuhan ibadah.</li>';
+  $('slots').innerHTML=current.segments.map((s,i)=>{
+   const titles=s.songs.filter(e=>e.songId).map(e=>resolvedEntry(e,state().songs).title);
+   const description=SEGMENT_TYPES[s.type]+(titles.length?' · '+titles.join(' / '):' · Belum pilih lagu');
+   return `<li class="service-segment" data-segment-id="${esc(s.id)}"><button class="segment-drag iconbtn" data-builder="drag" data-id="${esc(s.id)}" aria-label="Urutkan ${esc(s.name)}. Alt dan panah atas/bawah, atau Naik/Turun di editor.">${icon('grip')}</button><button class="segment-summary" data-builder="edit-segment" data-id="${esc(s.id)}" aria-label="Edit ${esc(s.name)}"><span class="segment-content"><strong>${i+1}. ${esc(s.name)}</strong><small>${esc(description)}</small></span><span class="segment-chevron" aria-hidden="true">${icon('chevron')}</span></button></li>`;
+  }).join('')||'<li class="empty">Belum ada segmen. Tambahkan sesuai kebutuhan ibadah.</li>';
   const chosen=current.segments.flatMap(s=>s.songs).filter(e=>e.songId),notReady=chosen.filter(e=>state().songs.find(s=>s.id===e.songId)?.status!=='Siap').length,repeated=new Set(chosen.map(e=>e.songId)).size<chosen.length;
   $('serviceReadiness').textContent=[notReady?`${notReady} pilihan lagu belum berstatus Siap.`:'',repeated?'Lagu yang sama digunakan beberapa kali.':''].filter(Boolean).join(' ');
   $('servicePrint').textContent=formatService({...current,date:current.date||'',wl:current.wl||'',theme:current.theme||''},state().songs);
