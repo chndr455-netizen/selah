@@ -42,6 +42,7 @@ jobs:
             node scripts/check-content.mjs --base origin/main
           fi
       - run: node tests/validate.mjs
+      - run: node tests/service-overview.mjs
       - run: node tests/service-model.mjs
       - run: node tests/song-submission.mjs
       - run: node tests/service-song-picker.mjs
