@@ -4,20 +4,20 @@
     {
       "song_id": "s002",
       "lyrics_sha256": "c33c6bd5e3628040417babd1178a6c9951d8cad354c7eba3f74d81fd35c8f7fb",
-      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
-      "approval_type": "owner-confirmed-pilot",
+      "rights_sha256": "d0d85a3080736247b309499a9e42ef5881cfc9af9e7bdb0f6ad1627baeb3db0a",
+      "approval_type": "owner-confirmed",
       "approved_by": "chndr455-netizen",
-      "approved_at": "2026-11-22T03:55:19.000Z",
-      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+      "approved_at": "2026-11-22T04:25:21.282Z",
+      "basis": "Owner continued the Approved publication workflow for these submitted lyric versions on 2026-11-22."
     },
     {
       "song_id": "s004",
-      "lyrics_sha256": "8e020da0970e9bff48b64bd75ece641dbc2792665746ec9b69b27b8c6ae10ea7",
-      "rights_sha256": "843ac01149cced785dfebd0028d3b03ba78e286e1c6f9517ebfcdb609d97af4c",
-      "approval_type": "owner-confirmed-pilot",
+      "lyrics_sha256": "0ab3bfe02f43f80f53d4966dcbb2a3321d356ac62aa5c4660db5c4661f63e9d4",
+      "rights_sha256": "d0d85a3080736247b309499a9e42ef5881cfc9af9e7bdb0f6ad1627baeb3db0a",
+      "approval_type": "owner-confirmed",
       "approved_by": "chndr455-netizen",
-      "approved_at": "2026-11-22T03:55:19.000Z",
-      "basis": "Owner explicitly confirmed Approved for the five pilot songs in the 2026-11-22 task. This is an editorial publication decision, not independent legal verification or a license granted by a disclaimer."
+      "approved_at": "2026-11-22T04:25:21.321Z",
+      "basis": "Owner continued the Approved publication workflow for these submitted lyric versions on 2026-11-22."
     },
     {
       "song_id": "s005",
@@ -72,6 +72,15 @@
       "approved_by": "chndr455-netizen",
       "approved_at": "2026-11-22T04:19:23.986Z",
       "basis": "Owner requested the Approved publication note for the submitted lyric version on 2026-11-22."
+    },
+    {
+      "song_id": "s016",
+      "lyrics_sha256": "8dfd4d4223c8f6d122fe27b5df60b8e08a3a3e64d5e459011bd8cc4144666126",
+      "rights_sha256": "296fcace94dcf938bf1641e46c9a9c63c4f8d30f596b652f80f0a061937f9850",
+      "approval_type": "owner-confirmed",
+      "approved_by": "chndr455-netizen",
+      "approved_at": "2026-11-22T04:25:21.372Z",
+      "basis": "Owner continued the Approved publication workflow for these submitted lyric versions on 2026-11-22."
     }
   ]
 }

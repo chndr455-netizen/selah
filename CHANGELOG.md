@@ -2,9 +2,10 @@
 
 ## Song Library — 2026-11-22
 
+- Added lyrics for Datanglah dan Bertahta and applied the submitted revision for Dengan Sayap-Mu. Ku Mau Cinta Yesus Selamanya already matched its submission. Marked publication permission Approved for all three. The catalog now has nine songs with lyrics.
 - Added the submitted lyrics for Allah Itu Baik, Bapa Kau Setia, and Bersorak Sorai.
 - Updated Bagi Tuhan Tak Ada yang Mustahil to the submitted version and confirmed Bejana-Mu matches its submission. Marked publication permission as Approved for all five submissions.
-- The catalog now contains eight songs with lyrics. Bapa Kau Setia stays in D because the submitted key was invalid.
+- Bapa Kau Setia stays in D because the submitted key was invalid.
 
 ## 0.5.4 — 2026-11-22
 - Applied the owner's pilot policy: permission-ledger matching no longer blocks public lyric display, CMS/content validation, version updates or publication preparation. Attribution fields, the copyright disclaimer and manual review remain.
