@@ -9,6 +9,7 @@
 
 ## Song Library — 2026-11-22
 
+- Added submitted lyrics and song details for Dalam Sesak Kupercaya, Dahsyat di Dalamku, Hari Ini Kurasa Bahagia, Hanya di Dalam Nama-Nya, and Firman-Mu Pelita Bagiku. The catalog now has 14 songs with lyrics.
 - Added lyrics for Datanglah dan Bertahta and applied the submitted revision for Dengan Sayap-Mu. Ku Mau Cinta Yesus Selamanya already matched its submission. Marked publication permission Approved for all three. The catalog now has nine songs with lyrics.
 - Added the submitted lyrics for Allah Itu Baik, Bapa Kau Setia, and Bersorak Sorai.
 - Updated Bagi Tuhan Tak Ada yang Mustahil to the submitted version and confirmed Bejana-Mu matches its submission. Marked publication permission as Approved for all five submissions.
