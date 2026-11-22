@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.3 — 2026-11-16
+- Replaced whole-record local overlays with three-way field merging on launch, refresh, import and saves from an editor open during refresh. Unchanged fields receive public updates; intentional local edits and clears remain. Conflicts, legacy ambiguous differences and hidden IDs survive reloads/backups without changing storage keys or schema.
+- Added read-only field comparisons under Edit. Local lyric text retains its exact whitespace; conflict handling never resets user data or silently replaces local values.
+- Normalized omitted optional CMS text fields at runtime and gated incoming public lyrics/rights against exact reviewed permission hashes. Withheld fields preserve previous/local text. Publication validators, song data and the permission ledger are unchanged.
+- Added catalog fingerprints, content-hash checking and persistent stale-version detection. Unknown/withheld snapshot versions are not falsely attributed in submissions.
+- Updated app/UI/SW cache to 0.5.3 and cached the sync/public-catalog modules and permission ledger. Added field/permission tests, responsive browser regressions and cached-app upgrade coverage. Existing main has unresolved sparse-schema/permission/version publication errors; see docs/SONG_SYNC_INVESTIGATION.md.
+
 ## Pages CMS Phase I — 2026-11-16
 - Configured the existing top-level song array with all 18 fields and preserved string BPM, category arrays, stable IDs and plain-text lyrics. Added required/key/ID checks and a reviewed lyric-permission hash ledger; no current lyrics or songs were changed.
 - Added editorial draft validation, trusted-main publication preparation and manual review PRs. Normalization restores optional empty strings removed by Pages CMS; schema drift, ID loss, unverified lyrics and conflicting edits block publication.

@@ -1,4 +1,4 @@
-# SELAH v0.5.2 — Service Song Picker / PWA
+# SELAH v0.5.3 — Field-level Song Synchronization / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
@@ -16,7 +16,9 @@ Run `python3 -m http.server 8000` from the repo root, then open `http://localhos
 ## Content vs local data
 Published source of truth: `data/songs.json` (public). Each song can have multiple service categories, key, BPM, meter, form, lyrics, meaning, Bible references, notes, source and rights. No chord charts. Unknown values are blank. All existing 38 base profiles migrated; full lyrics remain blank until authorized. Other educational material lives in `index.html` in this release; extraction into separate data files is a later improvement.
 
-Local add/edit/delete makes an overlay visible only on that browser/device. The public catalog is checked on launch and on clicking “Muat pembaruan publik”. An edited/deleted local record takes precedence over an update to that same ID; unmodified records update normally. “Pulihkan pustaka publik” discards song overrides, not journal or academy progress, and preserves setlist references, including missing songs. Export backups before reset. A v0.2 backup can be imported (migration uses frozen baseline). Local data isn't encrypted or synced. A separate origin (old local file vs GitHub Pages URL) cannot be read automatically; export JSON from old file and import on the new site, only if desired. Never publish that backup: it can contain personal notes and lyrics.
+Local add/edit/delete makes an overlay visible only on that browser/device. The public catalog is checked on launch and on clicking “Muat pembaruan publik”. Changes merge per field against the last public baseline: unedited local fields receive public updates, and intentional edits/clears stay local. Concurrent changes preserve the local value and record a comparison under Edit → Periksa perbedaan lokal. Local deletions remain hidden. Ambiguous differences from old whole-record merging are preserved for review. “Pulihkan pustaka publik” discards song overrides, not journal or academy progress, and preserves setlist references, including missing songs. Export backups before reset. A v0.2 backup can be imported (migration uses frozen baseline). Local data isn't encrypted or synced. A separate origin (old local file vs GitHub Pages URL) cannot be read automatically; export JSON from old file and import on the new site, only if desired. Never publish that backup: it can contain personal notes and lyrics.
+
+New public lyrics require exact reviewed lyric/rights hashes. Unverified incoming text is withheld without deleting previous/local lyrics; metadata can still load from a sparse CMS record. Mismatched hashes or a reused content version are shown as unknown for submissions. Full backups retain sync conflicts and hidden IDs under the same storage key/schema. See [s001 investigation and validation](docs/SONG_SYNC_INVESTIGATION.md). The strict publication checks remain required.
 
 ## Pengajuan lagu (v0.5.1)
 
@@ -51,6 +53,7 @@ The v0.5.2 picker leaves the published catalog and its content version unchanged
 ```sh
 node tests/validate.mjs
 node tests/catalog-merge.mjs
+node tests/public-catalog.mjs
 node tests/service-model.mjs
 node tests/song-submission.mjs
 node tests/service-song-picker.mjs
