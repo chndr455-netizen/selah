@@ -1,4 +1,4 @@
-# SELAH v0.5.4 — Owner-approved Lyrics Pilot / PWA
+# SELAH v0.5.5 — Owner-approved Lyrics Pilot / PWA
 
 Pusat pembelajaran pelayanan musik gereja. Bahasa Indonesia, mobile-first, static PWA, nonkomersial. Migrasi dari SELAH v0.2: 38 profil lagu dan seluruh halaman fondasi dipertahankan; identitas merah/kuning/cream, welcome screen, data lagu eksternal, serta offline app shell ditambahkan.
 
