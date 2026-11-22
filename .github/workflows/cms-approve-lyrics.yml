@@ -1,4 +1,4 @@
-name: Prepare lyric permission review
+name: Record optional owner lyric approval
 on:
   workflow_dispatch:
     inputs:
@@ -11,7 +11,7 @@ on:
         required: true
         type: string
       permission_verified:
-        description: I have reviewed permission for these exact lyrics and rights text
+        description: I confirm this owner editorial approval record (optional; not proof of a license)
         required: true
         default: false
         type: boolean
@@ -38,7 +38,7 @@ jobs:
           CONFIRMED: ${{ inputs.permission_verified }}
         run: |
           if [ "$CONFIRMED" != 'true' ]; then
-            echo 'Permission must be reviewed before recording a decision.' >&2
+            echo 'Confirm the editorial decision before recording it.' >&2
             exit 1
           fi
           git fetch origin refs/heads/cms/editorial:refs/remotes/origin/cms/editorial
@@ -55,7 +55,7 @@ jobs:
           cat > "$RUNNER_TEMP/selah-permission-pr.md" <<'BODY'
           This approval-only PR records a permission review explicitly confirmed by the workflow actor. It hashes the exact saved editorial lyrics and rights text. It does not publish lyrics or verify a legal claim automatically.
 
-          Owner: review the record and actual authorization before approving/merging. The separate CMS publication job can use it only after it exists on main. No content/app version changes are included.
+          Owner: review the record and actual authorization before approving/merging. This optional record is not a prerequisite for CMS publication. No content/app version changes are included.
           BODY
           gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$branch" --title 'Content: review lyric publication permission' --body-file "$RUNNER_TEMP/selah-permission-pr.md"
           gh workflow run validate.yml --repo "$GITHUB_REPOSITORY" --ref "$branch"

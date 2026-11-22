@@ -48,7 +48,7 @@ export function createSongSubmission({draft,published=null,baseVersion=null,incl
  const hasLyrics=includeLyrics&&!!(proposed.lyrics.trim()||original?.lyrics?.trim());
  const warnings=[];
  if(baseVersion===null)warnings.push('Versi pustaka asal belum diketahui; bandingkan dengan katalog sebelum menerapkan.');
- if(hasLyrics)warnings.push('Izin publikasi lirik belum diverifikasi. Teks dan bukti izin harus ditinjau sebelum publikasi.');
+ if(hasLyrics)warnings.push('Izin publikasi tidak diverifikasi otomatis. Metadata ini hanya informasi review dan bukan syarat publikasi pilot.');
  result.included_sensitive_fields={lyrics:includeLyrics,rights:includeRights};
  result.omitted_fields=['lyrics','rights'].filter(key=>!result.included_sensitive_fields[key]);
  result.review={required:true,publication_permission_verified:false,lyrics_permission:hasLyrics?'unverified':includeLyrics?'no_text':'not_included',warnings};

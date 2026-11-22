@@ -41,6 +41,6 @@ try{
  const {normalizeDraft,canonical,validateCatalog}=await import('../scripts/content-model.mjs');
  const restored=normalizeDraft(JSON.parse(fs.readFileSync(path.join(tmp,'roundtrip.json')))),catalog=JSON.parse(fs.readFileSync('data/songs.json'));
  if(canonical(restored)!==canonical(catalog))throw Error('Upstream save lost or changed song data.');
- validateCatalog(restored,JSON.parse(fs.readFileSync('data/lyrics-permissions.json')),{base:catalog});
+ validateCatalog(restored,null,{base:catalog});
  console.log('OK: publication normalization restores every field/type and all 38 songs exactly after actual upstream save transforms.');
 }finally{fs.rmSync(tmp,{recursive:true,force:true})}

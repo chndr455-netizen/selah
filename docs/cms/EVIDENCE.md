@@ -1,5 +1,7 @@
 # Phase I implementation evidence — 2026-11-16
 
+Historical report: the permission gate described here was superseded by the owner-approved 2026-11-22 pilot. See [current policy](../LYRICS_PILOT.md).
+
 Baseline: main `0c880e8` (merged v0.5.2 picker). Public catalog: **38 songs**, content version `2026-11-16.1`, app version `0.5.2`. Integration leaves `data/songs.json`, frozen legacy catalog, application assets, manifest, service worker and version file unchanged.
 
 ## Passed locally
